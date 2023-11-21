@@ -54,18 +54,18 @@ p {
   padding-top: 150px;
   height: 100vh;
   max-width: 400px;
+  margin-left: 100px;
 }
 
-.work h1 {
-  padding-top: 150px;
-  margin: 0 auto;
-  text-align: center;
+#container H1 {
+  margin-bottom: 300px;
 }
 
 #container1 {
-  margin-top: -100px;
+  padding-top: 150px;
   height: 100vh;
   max-width: 400px;
+  margin-left: 100px;
 }
 
 footer {
