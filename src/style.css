@@ -1,5 +1,27 @@
 @import url("https://use.typekit.net/jmk3xov.css");
 
+/* fonts */
+/* font-family: "good-times", sans-serif;
+font-weight: 400;
+font-style: normal;
+
+font-family: "good-times", sans-serif;
+font-weight: 400;
+font-style: italic;
+
+font-family: "good-times", sans-serif;
+font-weight: 700;
+font-style: normal;
+
+font-family: "good-times", sans-serif;
+font-weight: 700;
+font-style: italic;
+
+font-family: "good-times-bad-times", sans-serif;
+font-weight: 900;
+font-style: normal; */
+
+
 canvas {
   position: fixed;
   top: 0;
@@ -12,7 +34,7 @@ body {
   height: 100vh;
   width: 100vw;
   margin: 0 auto;
-  font-family: 'your-chosen-font', sans-serif;
+
   /* Replace 'your-chosen-font' with the actual font name */
 }
 
@@ -43,17 +65,31 @@ button {
 }
 
 h1 {
+  font-family: "good-times", sans-serif;
+  font-weight: 700;
+  font-style: normal;
   font-size: 4em;
+
+}
+
+p,
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 2em;
 }
 
 p {
-  color: #f0f0f0;
+  font-size: 1em;
+
 }
 
 #container {
   padding-top: 150px;
   height: 100vh;
-  max-width: 400px;
+  max-width: 500px;
   margin-left: 100px;
 }
 
@@ -61,10 +97,14 @@ p {
   margin-bottom: 300px;
 }
 
+.work h2 {
+  padding-top: 130px;
+}
+
 #container1 {
   padding-top: 150px;
   height: 100vh;
-  max-width: 400px;
+  max-width: 500px;
   margin-left: 100px;
 }
 
