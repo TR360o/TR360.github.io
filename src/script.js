@@ -30,27 +30,27 @@ camera.position.setX(-3);
 // render == draw//
 renderer.render(scene, camera);
 
-function addCubes() {
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
-    wireframe: true,
-  });
-  const cube = new THREE.Mesh(geometry, material);
+// function addCubes() {
+//   const geometry = new THREE.BoxGeometry(1, 1, 1);
+//   const material = new THREE.MeshBasicMaterial({
+//     color: 0x00ff00,
+//     wireframe: true,
+//   });
+//   const cube = new THREE.Mesh(geometry, material);
 
-  const [x, y, z] = Array(3)
-    .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(5));
+//   const [x, y, z] = Array(3)
+//     .fill()
+//     .map(() => THREE.MathUtils.randFloatSpread(5));
 
-  cube.position.set(x, y, z);
-  scene.add(cube);
-}
+//   cube.position.set(x, y, z);
+//   scene.add(cube);
+// }
 
-//draw sddCubes in scene
-Array(50).fill().forEach(addCubes);
+// //draw sddCubes in scene
+// Array(50).fill().forEach(addCubes);
 
-// randomly change position of cubes in addCubes onClick
-document.addEventListener("click", addCubes);
+// // randomly change position of cubes in addCubes onClick
+// document.addEventListener("click", addCubes);
 
 // Torus
 
@@ -114,6 +114,49 @@ function addStar() {
 // Aantal sterren dat word gegenereerd
 Array(400).fill().forEach(addStar);
 
+const testgeometry = new THREE.BoxGeometry(2, 0.75, 1);
+const edges = new THREE.EdgesGeometry(testgeometry);
+const line = new THREE.LineSegments(
+  edges,
+  new THREE.LineBasicMaterial({ color: 0xffffff })
+);
+scene.add(line);
+
+// Add click event listener to window
+window.addEventListener("click", onClick, false);
+
+// Add scroll event listener to window
+window.addEventListener("wheel", onScroll, false);
+
+// Scroll event handler
+function onClick(event) {
+  // Check if the click occurred on the cube
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects([line]);
+
+  if (intersects.length > 0) {
+    // Cube is clicked
+    console.log("Cube clicked!");
+
+    // Scroll down by 1000 pixels (adjust the value as needed)
+    window.scrollTo({
+      top: window.scrollY + 1000,
+      behavior: "smooth", // You can use 'auto' instead of 'smooth' for an instant scroll
+    });
+  }
+}
+
+function onScroll(event) {
+  // Add your scroll-down logic here
+  console.log("Scrolling down!");
+}
 // Background
 //-------------------------------------------------------------------
 //Texture inladen
@@ -152,6 +195,10 @@ Array(400).fill().forEach(addStar);
 // );
 
 // scene.add(moon);
+
+line.position.z = -10;
+line.position.x = 0;
+line.position.y = -1.95;
 
 torus.position.z = -15;
 torus.position.x = 10;
