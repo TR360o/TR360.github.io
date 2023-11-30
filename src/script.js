@@ -1,8 +1,10 @@
-//to do
-//addCubes fixen
-
 // import "./style.css";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import GUI from "lil-gui";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import typefaceFont from "three/examples/fonts/helvetiker_regular.typeface.json";
 //get around the scene using the mouse//
 // import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
@@ -29,6 +31,8 @@ camera.position.setZ(30);
 camera.position.setX(-3);
 // render == draw//
 renderer.render(scene, camera);
+
+// Text loading
 
 // function addCubes() {
 //   const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -93,26 +97,6 @@ scene.add(pointLight, ambientLight);
 // scene.add(lightHelper, gridHelper)
 
 // const controls = new OrbitControls(camera, renderer.domElement);
-
-//genereerd sterren
-function addStar() {
-  //radius staat tussen haakjes//
-  const geometry = new THREE.SphereGeometry(0.1, 24, 24);
-  const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-  const star = new THREE.Mesh(geometry, material);
-
-  // randFloatSpread genereert random getallen tussen de -100 en 100
-  const [x, y, z] = Array(3)
-    .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(90));
-
-  //random nummers pakken om de positie van de ster te zetten
-  star.position.set(x, y, z);
-  scene.add(star);
-}
-
-// Aantal sterren dat word gegenereerd
-Array(400).fill().forEach(addStar);
 
 const testgeometry = new THREE.BoxGeometry(2, 0.75, 1);
 const edges = new THREE.EdgesGeometry(testgeometry);
