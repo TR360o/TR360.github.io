@@ -1,26 +1,33 @@
 @import url("https://use.typekit.net/jmk3xov.css");
 
-/* fonts */
-/* font-family: "good-times", sans-serif;
-font-weight: 400;
-font-style: normal;
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
-font-family: "good-times", sans-serif;
-font-weight: 400;
-font-style: italic;
 
-font-family: "good-times", sans-serif;
-font-weight: 700;
-font-style: normal;
+:root {
+  --dark-bg: rgba(15, 15, 15, 0.95);
+  --spacing: 350px;
 
-font-family: "good-times", sans-serif;
-font-weight: 700;
-font-style: italic;
+  font-family: brandon-grotesque, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-font-family: "good-times-bad-times", sans-serif;
-font-weight: 900;
-font-style: normal; */
 
+main {
+  width: 100vw;
+  color: white;
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+  margin: 0px auto;
+  padding: 120px 0px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
 
 canvas {
   position: fixed;
@@ -29,87 +36,52 @@ canvas {
 }
 
 
-body {
-  overflow: auto;
-  height: 100vh;
-  width: 100vw;
-  margin: 0 auto;
 
-  /* Replace 'your-chosen-font' with the actual font name */
+header {
+  background: var(--dark-bg);
+  grid-column: 2 / span 5;
+  font-size: 2.5rem;
+  padding: 2rem;
+  margin-bottom: var(--spacing);
+  opacity: 0;
 }
 
-main {
-  position: relative;
-  z-index: 1;
-}
+section {
+  grid-column: 2 / 8;
+  padding: 1rem;
+  background: var(--dark-bg);
+  font-size: 1.25rem;
+  line-height: 1.5;
 
-
-.flexbox-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  margin-top: 630px;
+  margin-left: 20px;
+  max-width: 550px;
 
 }
 
-h1,
-h2,
-p,
-button {
-  margin: 0;
-  color: #f0f0f0;
-  margin-top: 20px;
-  margin-bottom: 20px;
+div {
+  margin-top: 600px;
   margin-left: 50px;
+  max-width: 500px;
+  grid-column: 2 / 8;
 }
 
-h1 {
-  font-family: "good-times", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 4em;
+/* #leftBlock {
+  position: relative;
+  left: 60px;
+  /* Initial left position */
 
-}
 
-p,
-h2 {
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* #blok {
 
-h2 {
-  font-size: 2em;
+
+  /* Initial left position */
+
+
+*/ .left {
+  grid-column: 6 / 12;
 }
 
 p {
-  font-size: 1em;
-
-}
-
-#container {
-  padding-top: 150px;
-  height: 100vh;
-  max-width: 500px;
-  margin-left: 100px;
-}
-
-#container H1 {
-  margin-bottom: 300px;
-}
-
-.work h2 {
-  padding-top: 130px;
-}
-
-#container1 {
-  padding-top: 150px;
-  height: 100vh;
-  max-width: 500px;
-  margin-left: 100px;
-}
-
-footer {
-  padding-bottom: 400px;
-  /* Set your desired background color */
-
+  color: white;
 }
