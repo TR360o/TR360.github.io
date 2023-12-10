@@ -5,10 +5,10 @@
 //get around the scene using the mouse//
 // import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-import * as THREE from "../node_modules/three/build/three.module.js";
+import * as THREE from "three";
 // import GUI from "lil-gui";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
-import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { FontLoader } from "three/addons/loaders/FontLoader.js";
+import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 
 // Debug
 // const gui = new GUI();
@@ -33,11 +33,11 @@ renderer.render(scene, camera);
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
-const matcapTexture1 = textureLoader.load("/textures/matcaps/16.png");
+const matcapTexture1 = textureLoader.load("../static/textures/matcaps/16.png");
 matcapTexture1.colorSpace = THREE.SRGBColorSpace;
 const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture1 });
 
-const matcapTexture2 = textureLoader.load("/textures/matcaps/14.png");
+const matcapTexture2 = textureLoader.load("../static/textures/matcaps/14.png");
 matcapTexture2.colorSpace = THREE.SRGBColorSpace;
 
 /**
@@ -62,7 +62,7 @@ textGroup.position.x = 0;
 scene.add(textGroup3);
 
 const fontLoader = new FontLoader();
-fontLoader.load("/fonts/Varela_Round_Regular.json", (font) => {
+fontLoader.load("../static/fonts/Varela_Round_Regular.json", (font) => {
   const textGeometryH1 = new TextGeometry("Welcome t    my space", {
     font: font,
     size: 5,
@@ -155,7 +155,7 @@ textGroup.add(triangle);
 //Group 2 About me
 
 const fontLoader2 = new FontLoader();
-fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
+fontLoader2.load("../static/fonts/Varela_Round_Regular.json", (font) => {
   const textGeometryH1 = new TextGeometry("About Me", {
     font: font,
     size: 2.5,
@@ -186,7 +186,7 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
 // Group3 works
 
 const fontLoader3 = new FontLoader();
-fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
+fontLoader2.load("../static/fonts/Varela_Round_Regular.json", (font) => {
   const textGeometryH3 = new TextGeometry("Works", {
     font: font,
     size: 2.5,
@@ -215,7 +215,7 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
 
 });
 
-const thikaTexture = new THREE.TextureLoader().load("/assets/thikaCube.png");
+const thikaTexture = new THREE.TextureLoader().load("./assets/thikaCube.png");
 var cgeometry = new THREE.BoxGeometry(15, 15, 0.8);
 var material = new THREE.MeshBasicMaterial({ map: thikaTexture });
 var cube = new THREE.Mesh(cgeometry, material);
