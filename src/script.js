@@ -5,7 +5,7 @@
 //get around the scene using the mouse//
 // import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-import * as THREE from "three";
+import * as THREE from "../node_modules/three/build/three.module.js";
 // import GUI from "lil-gui";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
