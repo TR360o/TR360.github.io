@@ -232,18 +232,21 @@ pCube.position.y = -78;
 textGroup3.add(pCube);
 
 const blocks = [];
+const gapX = 5; // Adjust the gap along the x-axis
+const gapY = 5; // Adjust the gap along the y-axis
+
 for (let i = 0; i < 6; i++) {
-  const geometry = new THREE.BoxGeometry();
+  const geometry = new THREE.BoxGeometry(3, 3, 3);
   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   const block = new THREE.Mesh(geometry, material);
-  block.position.x = (i % 3) * 2 - 2; // Distribute blocks along the x-axis
-  block.position.y = Math.floor(i / 3) * 2 - 2; // Distribute blocks along the y-axis
-  block.position.y += -80; // Adjust the initial y position to -80
 
+  block.position.x = (i % 3) * gapX - 2; // Distribute blocks along the x-axis with increased gap
+  block.position.y = Math.floor(i / 3) * gapY - 2; // Distribute blocks along the y-axis with increased gap
+  block.position.y += -80; // Adjust the initial y position to -80
 
   blocks.push(block);
   scene.add(block);
-  console.log(blocks)
+  console.log(blocks);
 }
 /**
  * Sizes
@@ -310,10 +313,7 @@ const clock = new THREE.Clock();
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
-  blocks.forEach(block => {
-    block.rotation.x += 0.01;
-    block.rotation.y += 0.01;
-  });
+
 
 
   renderer.render(scene, camera);
