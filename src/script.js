@@ -27,55 +27,24 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
-// camera.position.setZ(50);
-// camera.position.setX(-3);
-
-// lights //
-// const spotLight = new THREE.SpotLight(0xffffff, 3, 100, 0.22, 1);
-// spotLight.position.set(0, 25, 0);
-// camera.lookAt(0, 0, 0); //weghalen
-// spotLight.castShadow = true;
-// spotLight.shadow.bias = -0.0001;
-// scene.add(spotLight);
-
-// // Create an ambient light
-// const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
-// scene.add(ambientLight);
-
-// // Create a directional light
-// const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // white light
-// scene.add(directionalLight);
-
-
-
-//models
-// const loader = new GLTFLoader().setPath('/assets/gmail/');
-// loader.load('scene.gltf', function (gltf) {
-//   const mesh = gltf.scene;
-//   mesh.position.set(1, 1, 1);
-//   scene.add(mesh);
-// });
-
-// const loader = new GLTFLoader();
-
-// loader.load(
-//   '/assets/gmail/scene.gltf', // replace with the path to your model
-
-//   function (gltf) {
-
-//     gltf.scene.scale.set(2, 2, 2);
-//     // gltf.scene.position.set(0, -3, 1);
-//     scene.add(gltf.scene);
-//   },
-//   undefined,
-//   function (error) {
-//     console.error(error);
-//   }
-
-// );
-
+//Variables
 var positionX = -35;
 var letterThickness = 0.4;
+
+// work models
+var positionYrow1 = -97;
+var positionYrow2 = -120;
+
+var positionXColumn1 = -20;
+var positionXColumn2 = 0;
+var positionXColumn3 = 20;
+
+//contact models
+var positionYContact = -160;
+
+//border
+var borderX = 0.02;
+
 
 // /* 3D models
 //   */
@@ -85,7 +54,7 @@ loader.load(
   "/assets/fractal1/scene.gltf",
   function (gltf) {
     gltf.scene.scale.set(10, 10, 10);
-    gltf.scene.position.set(20, -93, 1);
+    gltf.scene.position.set(positionXColumn3, positionYrow1 + 3, 0);
     scene.add(gltf.scene);
   },
   function (xhr) {
@@ -102,7 +71,7 @@ loader.load(
   "/assets/blender/scene.gltf",
   function (gltf) {
     gltf.scene.scale.set(0.01, 0.01, 0.01);
-    gltf.scene.position.set(0, -97, 1);
+    gltf.scene.position.set(positionXColumn2, positionYrow1, 0);
     scene.add(gltf.scene);
   },
   function (xhr) {
@@ -120,7 +89,7 @@ loader.load(
   "/assets/gmail/gmail3.gltf",
   function (gltf) {
     gltf.scene.scale.set(2, 2, 2);
-    gltf.scene.position.set(-30, -138, 1);
+    gltf.scene.position.set(-30, positionYContact, 0);
     scene.add(gltf.scene);
   },
   function (xhr) {
@@ -133,12 +102,12 @@ loader.load(
 );
 
 //instagram
-//gmail
+
 loader.load(
   "/assets/insta/scene.gltf",
   function (gltf) {
     gltf.scene.scale.set(.9, .9, .9);
-    gltf.scene.position.set(-10, -141, 1);
+    gltf.scene.position.set(-10, positionYContact - 3, 0);
     scene.add(gltf.scene);
   },
   function (xhr) {
@@ -158,7 +127,7 @@ fbxLoader.load(
     // object.scale.set(.01, .01, .01)
     object.scale.set(.03, .03, .03);
     object.rotateY(Math.PI / -2);
-    object.position.set(-22, -110, 0);
+    object.position.set(positionXColumn1, positionYrow2, 0);
     scene.add(object)
   },
   (xhr) => {
@@ -169,13 +138,14 @@ fbxLoader.load(
   }
 )
 
+//three model
 fbxLoader.load(
   'assets/three/three.fbx',
   (object) => {
     // object.scale.set(.01, .01, .01)
     object.scale.set(.001, .001, .001);
     object.rotateY(Math.PI / -2015);
-    object.position.set(-2, -110, 0);
+    object.position.set(positionXColumn2 - 1, positionYrow2, 0);
     scene.add(object)
   },
   (xhr) => {
@@ -190,9 +160,10 @@ fbxLoader.load(
 fbxLoader.load(
   'assets/insulin/pen1.fbx',
   (object) => {
-    object.scale.set(.005, .005, .005)
-
-    object.position.set(20, -110, 0);
+    object.scale.set(.004, .004, .004)
+    object.rotateZ(Math.PI / -4);
+    object.rotateX(Math.PI / 2);
+    object.position.set(positionXColumn3 - 1, positionYrow2, 0);
     scene.add(object)
   },
   (xhr) => {
@@ -212,7 +183,114 @@ fbxLoader.load(
   (object) => {
     // object.scale.set(.01, .01, .01)
     object.rotateX(Math.PI / 5); // Adjust the angle as needed
-    object.position.set(-20, -95, 1);
+    object.position.set(positionXColumn1, positionYrow1 + 1, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+
+//Borders
+
+//Border Tomato
+fbxLoader.load(
+  'assets/border/border.fbx',
+  (object) => {
+    object.scale.set(borderX, .1, .1)
+    object.rotateY(Math.PI / 2); // Adjust the angle as needed
+    object.position.set(0, -93, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+//border blender
+fbxLoader.load(
+  'assets/border/border.fbx',
+  (object) => {
+    object.scale.set(borderX, .1, .1)
+    object.rotateY(Math.PI / 2); // Adjust the angle as needed
+    object.position.set(-20, -93, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+
+//border insulin
+fbxLoader.load(
+  'assets/border/border.fbx',
+  (object) => {
+    object.scale.set(borderX, .1, .1)
+    object.rotateY(Math.PI / 2); // Adjust the angle as needed
+    object.position.set(20, positionYrow2, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+
+//border three
+fbxLoader.load(
+  'assets/border/border.fbx',
+  (object) => {
+    object.scale.set(borderX, .1, .1)
+    object.rotateY(Math.PI / 2); // Adjust the angle as needed
+    object.position.set(positionXColumn2, positionYrow2, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+//border envelope
+fbxLoader.load(
+  'assets/border/border.fbx',
+  (object) => {
+    object.scale.set(borderX, .1, .1)
+    object.rotateY(Math.PI / 2); // Adjust the angle as needed
+    object.position.set(positionXColumn1, positionYrow2, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+//border envelope
+fbxLoader.load(
+  'assets/border/border.fbx',
+  (object) => {
+    object.scale.set(borderX, .1, .1)
+    object.rotateY(Math.PI / 2); // Adjust the angle as needed
+    object.position.set(20, -93, 0);
     scene.add(object)
   },
   (xhr) => {
@@ -244,7 +322,7 @@ obj.traverse(function (child) {
   }
 
 });
-obj.position.set(-20, -138, 1);
+obj.position.set(-20, positionYContact, 0);
 scene.add(obj);
 
 
@@ -351,14 +429,14 @@ fontLoader.load("/fonts/Varela_Round_Regular.json", (font) => {
 // Donuts
 const donutGeometry = new THREE.SphereGeometry(0.2, 48, 48);
 const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-const numberOfDonuts = 200;
+const numberOfDonuts = 250;
 
 for (let i = 0; i < numberOfDonuts; i++) {
   const donut = new THREE.Mesh(donutGeometry, starMaterial);
 
   // Adjust the range of positions for x, y, and z coordinates
   donut.position.x = (Math.random() - 0.5) * 600;
-  donut.position.y = (Math.random() - 0.5) * 600;
+  donut.position.y = (Math.random() - 0.5) * 1500;
   donut.position.z = (Math.random() - 0.5) * 600;
 
   donut.rotation.x = Math.random() * Math.PI;
@@ -496,7 +574,7 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
   });
 
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial);
-  textH1.position.y = -130;
+  textH1.position.y = -150;
   textH1.position.x = positionX;
   // const rotationAngle = Math.PI / -6;
   // textH1.rotation.y = rotationAngle;

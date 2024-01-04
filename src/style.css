@@ -1,11 +1,17 @@
 @import url("https://use.typekit.net/jmk3xov.css");
 
+body {
+  margin: 0;
+  padding: 0;
+  height: 3800px;
+}
+
 canvas {
   position: fixed;
   top: 0;
   left: 0;
-}
 
+}
 
 :root {
   --dark-bg: rgba(15, 15, 15, 0.95);
@@ -29,11 +35,7 @@ main {
   grid-template-columns: repeat(12, 1fr);
 }
 
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
+
 
 
 
@@ -53,8 +55,8 @@ section {
   font-size: 1.25rem;
   line-height: 1.5;
 
-  margin-top: 630px;
-  margin-left: 20px;
+  margin-top: 650px;
+  margin-left: 80px;
   max-width: 550px;
 
 }
