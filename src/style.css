@@ -60,10 +60,11 @@ section {
 }
 
 div {
-  margin-top: 600px;
+  margin-top: 625px;
   margin-left: 50px;
   max-width: 500px;
   grid-column: 2 / 8;
+  opacity: 0;
 }
 
 /* #leftBlock {
@@ -84,4 +85,16 @@ div {
 
 p {
   color: white;
+}
+
+#contact {
+  grid-column: 2 / 8;
+  padding: 1rem;
+  background: var(--dark-bg);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-top: 630px;
+  margin-left: 20px;
+  max-width: 550px;
+  opacity: 0;
 }

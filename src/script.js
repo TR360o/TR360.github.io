@@ -9,25 +9,108 @@ import * as THREE from "three";
 // import GUI from "lil-gui";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-// Debug
-// const gui = new GUI();
-// Scene
+
+// Scene & renderer
 const scene = new THREE.Scene();
-
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 });
-
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0xffffff); // white
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
 // camera.position.setZ(50);
 // camera.position.setX(-3);
 
-renderer.render(scene, camera);
+// lights //
+// const spotLight = new THREE.SpotLight(0xffffff, 3, 100, 0.22, 1);
+// spotLight.position.set(0, 25, 0);
+// camera.lookAt(0, 0, 0); //weghalen
+// spotLight.castShadow = true;
+// spotLight.shadow.bias = -0.0001;
+// scene.add(spotLight);
+
+// // Create an ambient light
+// const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+// scene.add(ambientLight);
+
+// // Create a directional light
+// const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // white light
+// scene.add(directionalLight);
+
+
+
+//models
+// const loader = new GLTFLoader().setPath('/assets/gmail/');
+// loader.load('scene.gltf', function (gltf) {
+//   const mesh = gltf.scene;
+//   mesh.position.set(1, 1, 1);
+//   scene.add(mesh);
+// });
+
+// const loader = new GLTFLoader();
+
+// loader.load(
+//   '/assets/gmail/scene.gltf', // replace with the path to your model
+
+//   function (gltf) {
+
+//     gltf.scene.scale.set(2, 2, 2);
+//     // gltf.scene.position.set(0, -3, 1);
+//     scene.add(gltf.scene);
+//   },
+//   undefined,
+//   function (error) {
+//     console.error(error);
+//   }
+
+// );
+
+var positionX = -35;
+var letterThickness = 0.4;
+
+// /* 3D models
+//   */
+const loader = new GLTFLoader();
+loader.load(
+  "/assets/fractal1/scene.gltf",
+  function (gltf) {
+    gltf.scene.scale.set(10, 10, 10);
+    gltf.scene.position.set(-2, -93, 1);
+    scene.add(gltf.scene);
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+  },
+  function (error) {
+    console.log("An error happened");
+  }
+
+);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 2.4)
+scene.add(ambientLight)
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.8)
+directionalLight.castShadow = true
+directionalLight.shadow.mapSize.set(1024, 1024)
+directionalLight.shadow.camera.far = 15
+directionalLight.shadow.camera.left = - 7
+directionalLight.shadow.camera.top = 7
+directionalLight.shadow.camera.right = 7
+directionalLight.shadow.camera.bottom = - 7
+directionalLight.position.set(- 5, 5, 0)
+scene.add(directionalLight)
+
+
+
 
 /**
  * Textures
@@ -158,12 +241,12 @@ const fontLoader2 = new FontLoader();
 fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
   const textGeometryH1 = new TextGeometry("About Me", {
     font: font,
-    size: 2.5,
+    size: 3,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
-    bevelThickness: 1,
-    bevelSize: 0.3,
+    bevelThickness: letterThickness,
+    bevelSize: 0.23,
     bevelOffset: 0,
     bevelSegments: 4,
   });
@@ -176,7 +259,7 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
 
   const textH1 = new THREE.Mesh(textGeometryH1, textMaterial);
   textH1.position.y = -35;
-  textH1.position.x = -25;
+  textH1.position.x = positionX;
 
   textGroup2.add(textH1);
 
@@ -189,11 +272,11 @@ const fontLoader3 = new FontLoader();
 fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
   const textGeometryH3 = new TextGeometry("Works", {
     font: font,
-    size: 2.5,
+    size: 3,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
-    bevelThickness: 1,
+    bevelThickness: letterThickness,
     bevelSize: 0.3,
     bevelOffset: 0,
     bevelSegments: 4,
@@ -207,7 +290,7 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
 
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial);
   textH1.position.y = -75;
-  textH1.position.x = 2;
+  textH1.position.x = positionX;
   // const rotationAngle = Math.PI / -6;
   // textH1.rotation.y = rotationAngle;
   textGroup3.add(textH1);
@@ -231,20 +314,75 @@ pCube.position.x = 300;
 pCube.position.y = -78;
 textGroup3.add(pCube);
 
-const blocks = [];
-for (let i = 0; i < 6; i++) {
-  const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const block = new THREE.Mesh(geometry, material);
-  block.position.x = (i % 3) * 2 - 2; // Distribute blocks along the x-axis
-  block.position.y = Math.floor(i / 3) * 2 - 2; // Distribute blocks along the y-axis
-  block.position.y += -80; // Adjust the initial y position to -80
+// const worksGeometry = new THREE.BoxGeometry(1, 1, 1);
+// const worksMaterial = new THREE.MeshBasicMaterial({
+//   color: 0x00ff00,
+// });
+
+// const worksCube1 = new THREE.Mesh(worksGeometry, worksMaterial);
+// textGroup3.add(worksCube1);
 
 
-  blocks.push(block);
-  scene.add(block);
-  console.log(blocks)
-}
+
+// Group3 works
+
+
+fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("contact", {
+    font: font,
+    size: 2.5,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.3,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+
+
+  const textMaterial = new THREE.MeshMatcapMaterial({
+    matcap: matcapTexture1,
+  });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial);
+  textH1.position.y = -130;
+  textH1.position.x = positionX;
+  // const rotationAngle = Math.PI / -6;
+  // textH1.rotation.y = rotationAngle;
+  textGroup3.add(textH1);
+
+
+});
+
+
+
+
+
+// const loader = new GLTFLoader();
+// loader.load('src/assets/gmail/scene.gltf',
+
+//   function (gltf) {
+//     scene.add(gltf.scene);
+
+//     gltf.animations; // Array<THREE.AnimationClip>
+//     gltf.scene; // THREE.Group
+//     gltf.scenes; // Array<THREE.Group>
+//     gltf.cameras; // Array<THREE.Camera>
+//     gltf.asset; // Object
+//   },
+//   function (xhr) {
+//     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+//   },
+//   function (error) {
+//     console.log('An error happened');
+//   }
+// );
+
+
+
+
 /**
  * Sizes
  */
@@ -293,7 +431,7 @@ function moveCamera() {
   const currentScrollY = window.scrollY;
   const scrollDistance = currentScrollY - totalScrollDistance;
 
-  camera.position.z += scrollDistance * -0.01;
+  // camera.position.z += scrollDistance * -0.005;
   camera.position.y -= scrollDistance * 0.05;
 
   totalScrollDistance = currentScrollY;
@@ -310,10 +448,7 @@ const clock = new THREE.Clock();
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
-  blocks.forEach(block => {
-    block.rotation.x += 0.01;
-    block.rotation.y += 0.01;
-  });
+
 
 
   renderer.render(scene, camera);
