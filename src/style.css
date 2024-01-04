@@ -85,6 +85,7 @@ div {
 
 p {
   color: white;
+  cursor: default;
 }
 
 #contact {
