@@ -10,7 +10,7 @@ import * as THREE from "three";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
 // Scene & renderer
 const scene = new THREE.Scene();
@@ -78,12 +78,13 @@ var letterThickness = 0.4;
 
 // /* 3D models
 //   */
+//fractal
 const loader = new GLTFLoader();
 loader.load(
   "/assets/fractal1/scene.gltf",
   function (gltf) {
     gltf.scene.scale.set(10, 10, 10);
-    gltf.scene.position.set(-2, -93, 1);
+    gltf.scene.position.set(20, -93, 1);
     scene.add(gltf.scene);
   },
   function (xhr) {
@@ -94,6 +95,74 @@ loader.load(
   }
 
 );
+
+//Blender
+loader.load(
+  "/assets/blender/scene.gltf",
+  function (gltf) {
+    gltf.scene.scale.set(0.01, 0.01, 0.01);
+    gltf.scene.position.set(0, -97, 1);
+    scene.add(gltf.scene);
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+  },
+  function (error) {
+    console.log("An error happened");
+  }
+
+);
+
+
+//gmail
+loader.load(
+  "/assets/gmail/gmail3.gltf",
+  function (gltf) {
+    gltf.scene.scale.set(2, 2, 2);
+    gltf.scene.position.set(-30, -138, 1);
+    scene.add(gltf.scene);
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+  },
+  function (error) {
+    console.log("An error happened");
+  }
+
+);
+
+
+
+
+
+const fbxLoader = new FBXLoader()
+fbxLoader.load(
+  'assets/tomato/tomato1.fbx',
+  (object) => {
+    // object.traverse(function (child) {
+    //     if ((child as THREE.Mesh).isMesh) {
+    //         (child as THREE.Mesh).material = material
+    //         if ((child as THREE.Mesh).material) {
+    //             ((child as THREE.Mesh).material as THREE.MeshBasicMaterial).transparent = false
+    //         }
+    //     }
+    // })
+    // object.scale.set(.01, .01, .01)
+    object.rotateX(Math.PI / 5); // Adjust the angle as needed
+
+    object.position.set(-20, -95, 1);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+
+
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 2.4)
 scene.add(ambientLight)
