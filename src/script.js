@@ -11,6 +11,7 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 
 // Scene & renderer
 const scene = new THREE.Scene();
@@ -21,7 +22,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0xffffff); // white
+// renderer.setClearColor(0xffffff); // white
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
@@ -131,6 +132,23 @@ loader.load(
 
 );
 
+//instagram
+//gmail
+loader.load(
+  "/assets/insta/scene.gltf",
+  function (gltf) {
+    gltf.scene.scale.set(.9, .9, .9);
+    gltf.scene.position.set(-10, -141, 1);
+    scene.add(gltf.scene);
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+  },
+  function (error) {
+    console.log("An error happened");
+  }
+
+);
 
 
 const fbxLoader = new FBXLoader()
@@ -186,6 +204,7 @@ fbxLoader.load(
 )
 
 
+
 //tomato
 
 fbxLoader.load(
@@ -204,6 +223,29 @@ fbxLoader.load(
   }
 )
 
+
+const objTextureLoader = new THREE.TextureLoader();
+const objLoader = new OBJLoader();
+
+const [texture, obj] = await Promise.all([
+  objTextureLoader.loadAsync('assets/linked/linked.png'),
+  objLoader.loadAsync('assets/linked/linked.obj'),
+
+
+]);
+
+obj.traverse(function (child) {
+
+  if (child.isMesh) {
+
+    child.material.map = texture;
+    child.geometry.computeVertexNormals();
+
+  }
+
+});
+obj.position.set(-20, -138, 1);
+scene.add(obj);
 
 
 
@@ -419,12 +461,7 @@ textGroup2.add(cube);
 cube.position.y = -47;
 
 
-var pgeometry = new THREE.BoxGeometry(5, 5, 5);
-var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-var pCube = new THREE.Mesh(pgeometry, material);
-pCube.position.x = 300;
-pCube.position.y = -78;
-textGroup3.add(pCube);
+
 
 // const worksGeometry = new THREE.BoxGeometry(1, 1, 1);
 // const worksMaterial = new THREE.MeshBasicMaterial({
@@ -584,9 +621,9 @@ const tick = () => {
   const speedMultiplierp = 2;
   const amplitudep = 0.005;
 
-  // Animate pCube based on scrollX
-  pCube.position.x = Math.min(70, 90 - scrollX);
-  pCube.position.y = -82 + Math.sin(elapsedTime * speedMultiplierp) * amplitudep;
+  // // Animate pCube based on scrollX
+  // pCube.position.x = Math.min(70, 90 - scrollX);
+  // pCube.position.y = -82 + Math.sin(elapsedTime * speedMultiplierp) * amplitudep;
 };
 
 tick();
