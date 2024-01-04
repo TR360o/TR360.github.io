@@ -133,23 +133,66 @@ loader.load(
 
 
 
-
-
 const fbxLoader = new FBXLoader()
+fbxLoader.load(
+  'assets/envelope/letter5.fbx',
+  (object) => {
+    // object.scale.set(.01, .01, .01)
+    object.scale.set(.03, .03, .03);
+    object.rotateY(Math.PI / -2);
+    object.position.set(-22, -110, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+fbxLoader.load(
+  'assets/three/three.fbx',
+  (object) => {
+    // object.scale.set(.01, .01, .01)
+    object.scale.set(.001, .001, .001);
+    object.rotateY(Math.PI / -2015);
+    object.position.set(-2, -110, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+//pen
+fbxLoader.load(
+  'assets/insulin/pen1.fbx',
+  (object) => {
+    object.scale.set(.005, .005, .005)
+
+    object.position.set(20, -110, 0);
+    scene.add(object)
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+
+//tomato
+
 fbxLoader.load(
   'assets/tomato/tomato1.fbx',
   (object) => {
-    // object.traverse(function (child) {
-    //     if ((child as THREE.Mesh).isMesh) {
-    //         (child as THREE.Mesh).material = material
-    //         if ((child as THREE.Mesh).material) {
-    //             ((child as THREE.Mesh).material as THREE.MeshBasicMaterial).transparent = false
-    //         }
-    //     }
-    // })
     // object.scale.set(.01, .01, .01)
     object.rotateX(Math.PI / 5); // Adjust the angle as needed
-
     object.position.set(-20, -95, 1);
     scene.add(object)
   },
