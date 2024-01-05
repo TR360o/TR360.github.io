@@ -194,112 +194,244 @@ fbxLoader.load(
   }
 )
 
+// Create a raycaster
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 
-//Borders
+// Add a listener for mousemove event
+document.addEventListener('mousemove', onMouseMove, false);
 
-//Border Tomato
-fbxLoader.load(
-  'assets/border/border.fbx',
-  (object) => {
-    object.scale.set(borderX, .1, .1)
-    object.rotateY(Math.PI / 2); // Adjust the angle as needed
-    object.position.set(0, -93, 0);
-    scene.add(object)
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-  },
-  (error) => {
-    console.log(error)
+function onMouseMove(event) {
+  // Calculate mouse coordinates in normalized device coordinates (NDC)
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Update the raycaster with the mouse coordinates
+  raycaster.setFromCamera(mouse, camera);
+
+  // Check for intersections
+  const intersects = raycaster.intersectObjects(scene.children, true);
+
+  // Reset opacity for all objects in the scene
+  scene.traverse((child) => {
+    if (child.isMesh) {
+      child.material.opacity = 0;
+    }
+  });
+
+  // Set opacity to 1 for the intersected object (if any)
+  if (intersects.length > 0) {
+    const object = intersects[0].object;
+    if (object.isMesh) {
+      object.material.opacity = 1;
+    }
   }
-)
+}
 
-//border blender
-fbxLoader.load(
-  'assets/border/border.fbx',
-  (object) => {
-    object.scale.set(borderX, .1, .1)
-    object.rotateY(Math.PI / 2); // Adjust the angle as needed
-    object.position.set(-20, -93, 0);
-    scene.add(object)
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-  },
-  (error) => {
-    console.log(error)
-  }
-)
+// Load Border Objects
+function loadBorderObject(filePath, position, rotation) {
+  fbxLoader.load(
+    filePath,
+    (object) => {
+      object.scale.set(borderX, 0.1, 0.1);
+      object.rotateY(rotation);
+      object.position.copy(position);
+
+      // Set initial opacity to 0
+      object.traverse((child) => {
+        if (child.isMesh) {
+          child.material.transparent = true;
+          child.material.opacity = 0;
+        }
+      });
+
+      // Add the object to the scene
+      scene.add(object);
+    },
+    (xhr) => {
+      console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+}
+
+// Load Border Objects with different positions and rotations
+const borderObjects = [
+  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(-20, -93, 0), rotation: Math.PI / 2 },
+  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(0, -93, 0), rotation: Math.PI / 2 },
+  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(20, positionYrow2, 0), rotation: Math.PI / 2 },
+  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(positionXColumn2, positionYrow2, 0), rotation: Math.PI / 2 },
+  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(positionXColumn1, positionYrow2, 0), rotation: Math.PI / 2 },
+  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(20, -93, 0), rotation: Math.PI / 2 },
+  // Add more border objects as needed
+];
+
+// Load all border objects
+borderObjects.forEach((border) => {
+  loadBorderObject(border.filePath, border.position, border.rotation);
+});
 
 
-//border insulin
-fbxLoader.load(
-  'assets/border/border.fbx',
-  (object) => {
-    object.scale.set(borderX, .1, .1)
-    object.rotateY(Math.PI / 2); // Adjust the angle as needed
-    object.position.set(20, positionYrow2, 0);
-    scene.add(object)
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-  },
-  (error) => {
-    console.log(error)
-  }
-)
+
+// //Borders
 
 
-//border three
-fbxLoader.load(
-  'assets/border/border.fbx',
-  (object) => {
-    object.scale.set(borderX, .1, .1)
-    object.rotateY(Math.PI / 2); // Adjust the angle as needed
-    object.position.set(positionXColumn2, positionYrow2, 0);
-    scene.add(object)
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-  },
-  (error) => {
-    console.log(error)
-  }
-)
+// // Create a raycaster
+// const raycaster = new THREE.Raycaster();
+// const mouse = new THREE.Vector2();
 
-//border envelope
-fbxLoader.load(
-  'assets/border/border.fbx',
-  (object) => {
-    object.scale.set(borderX, .1, .1)
-    object.rotateY(Math.PI / 2); // Adjust the angle as needed
-    object.position.set(positionXColumn1, positionYrow2, 0);
-    scene.add(object)
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-  },
-  (error) => {
-    console.log(error)
-  }
-)
+// // Add a listener for mousemove event
+// document.addEventListener('mousemove', onMouseMove, false);
 
-//border envelope
-fbxLoader.load(
-  'assets/border/border.fbx',
-  (object) => {
-    object.scale.set(borderX, .1, .1)
-    object.rotateY(Math.PI / 2); // Adjust the angle as needed
-    object.position.set(20, -93, 0);
-    scene.add(object)
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-  },
-  (error) => {
-    console.log(error)
-  }
-)
+// function onMouseMove(event) {
+//   // Calculate mouse coordinates in normalized device coordinates (NDC)
+//   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+//   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+//   // Update the raycaster with the mouse coordinates
+//   raycaster.setFromCamera(mouse, camera);
+
+//   // Check for intersections
+//   const intersects = raycaster.intersectObjects(scene.children, true);
+
+//   // Reset opacity for all objects in the scene
+//   scene.traverse((child) => {
+//     if (child.isMesh) {
+//       child.material.opacity = 0;
+//     }
+//   });
+
+//   // Set opacity to 1 for the intersected object (if any)
+//   if (intersects.length > 0) {
+//     const object = intersects[0].object;
+//     if (object.isMesh) {
+//       object.material.opacity = 1;
+//     }
+//   }
+// }
+
+
+
+// /// Load the FBX file
+// fbxLoader.load(
+//   'assets/border/border.fbx',
+//   (object) => {
+//     // Set the scale, rotation, and position
+//     object.scale.set(borderX, 0.1, 0.1);
+//     object.rotateY(Math.PI / 2);
+//     object.position.set(-20, -93, 0);
+
+//     // Change opacity
+//     object.traverse((child) => {
+//       if (child.isMesh) {
+//         // Assuming the material is a MeshStandardMaterial
+//         // You may need to adapt this based on your actual material type
+//         child.material.transparent = true;
+//         child.material.opacity = 0; // Set your desired opacity value (0.0 to 1.0)
+//       }
+//     });
+
+//     // Add the object to the scene
+//     scene.add(object);
+//   },
+//   (xhr) => {
+//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+//   },
+//   (error) => {
+//     console.log(error);
+//   }
+// );
+
+
+
+// //Border Tomato
+// fbxLoader.load(
+//   'assets/border/border.fbx',
+//   (object) => {
+//     object.scale.set(borderX, .1, .1)
+//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
+//     object.position.set(0, -93, 0);
+//     scene.add(object)
+//   },
+//   (xhr) => {
+//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+//   },
+//   (error) => {
+//     console.log(error)
+//   }
+// )
+
+
+// //border insulin
+// fbxLoader.load(
+//   'assets/border/border.fbx',
+//   (object) => {
+//     object.scale.set(borderX, .1, .1)
+//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
+//     object.position.set(20, positionYrow2, 0);
+//     scene.add(object)
+//   },
+//   (xhr) => {
+//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+//   },
+//   (error) => {
+//     console.log(error)
+//   }
+// )
+
+
+// //border three
+// fbxLoader.load(
+//   'assets/border/border.fbx',
+//   (object) => {
+//     object.scale.set(borderX, .1, .1)
+//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
+//     object.position.set(positionXColumn2, positionYrow2, 0);
+//     scene.add(object)
+//   },
+//   (xhr) => {
+//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+//   },
+//   (error) => {
+//     console.log(error)
+//   }
+// )
+
+// //border envelope
+// fbxLoader.load(
+//   'assets/border/border.fbx',
+//   (object) => {
+//     object.scale.set(borderX, .1, .1)
+//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
+//     object.position.set(positionXColumn1, positionYrow2, 0);
+//     scene.add(object)
+//   },
+//   (xhr) => {
+//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+//   },
+//   (error) => {
+//     console.log(error)
+//   }
+// )
+
+// //border envelope
+// fbxLoader.load(
+//   'assets/border/border.fbx',
+//   (object) => {
+//     object.scale.set(borderX, .1, .1)
+//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
+//     object.position.set(20, -93, 0);
+//     scene.add(object)
+//   },
+//   (xhr) => {
+//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+//   },
+//   (error) => {
+//     console.log(error)
+//   }
+// )
 
 
 const objTextureLoader = new THREE.TextureLoader();
