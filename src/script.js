@@ -180,11 +180,11 @@ fbxLoader.load(
 
 fbxLoader.load(
   'assets/tomato/tomato1.fbx',
-  (object) => {
+  (tomatoObject) => {
     // object.scale.set(.01, .01, .01)
-    object.rotateX(Math.PI / 5); // Adjust the angle as needed
-    object.position.set(positionXColumn1, positionYrow1 + 1, 0);
-    scene.add(object)
+    tomatoObject.rotateX(Math.PI / 5); // Adjust the angle as needed
+    tomatoObject.position.set(positionXColumn1, positionYrow1 + 1, 0);
+    scene.add(tomatoObject)
   },
   (xhr) => {
     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
