@@ -170,14 +170,16 @@ fbxLoader.load(
 )
 
 //pen
+let insulinObject = null;
 fbxLoader.load(
   'assets/insulin/pen1.fbx',
-  (object) => {
-    object.scale.set(.004, .004, .004)
-    object.rotateZ(Math.PI / -4);
-    object.rotateX(Math.PI / 2);
-    object.position.set(positionXColumn3 - 1, positionYrow2, 0);
-    scene.add(object)
+  (insulin) => {
+    insulinObject = insulin;
+    insulin.scale.set(.004, .004, .004)
+    insulin.rotateZ(Math.PI / -4);
+    insulin.rotateX(Math.PI / 2);
+    insulin.position.set(positionXColumn3 - 1, positionYrow2, 0);
+    scene.add(insulin)
   },
   (xhr) => {
     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
@@ -864,15 +866,14 @@ const tick = () => {
 
   //   currentIntersect = null
   // }
-
-  function handleObjectInteraction(object, scaleFactor, defaultScaleFactor) {
+  function handleObjectInteraction(object, scaleFactor, defaultScaleFactor, popupText) {
     if (object) {
       const modelIntersects = raycaster.intersectObject(object);
 
       if (modelIntersects.length) {
         console.log("hit");
-
         object.scale.set(...scaleFactor);
+        alert(popupText); // Display popup with the specified text
       } else {
         console.log("not hit");
         object.scale.set(...defaultScaleFactor);
@@ -880,11 +881,12 @@ const tick = () => {
     }
   }
 
-  handleObjectInteraction(tomatoObject, [1.2, 1.2, 1.2], [1, 1, 1], 1);
-  handleObjectInteraction(blenderObject, [0.02, 0.02, 0.02], [0.01, 0.01, 0.01]);
-  handleObjectInteraction(fractalObject, [11, 11, 11], [10, 10, 10]);
-  handleObjectInteraction(envelopeObject, [0.04, 0.04, 0.04], [0.03, 0.03, 0.03]);
-  handleObjectInteraction(threeObject, [0.0015, 0.0015, 0.0015], [0.001, 0.001, 0.001]);
+  handleObjectInteraction(tomatoObject, [1.2, 1.2, 1.2], [1, 1, 1], "Tomato Text");
+  handleObjectInteraction(blenderObject, [0.02, 0.02, 0.02], [0.01, 0.01, 0.01], "Blender Text");
+  handleObjectInteraction(fractalObject, [11, 11, 11], [10, 10, 10], "Fractal Text");
+  handleObjectInteraction(envelopeObject, [0.04, 0.04, 0.04], [0.03, 0.03, 0.03], "Envelope Text");
+  handleObjectInteraction(threeObject, [0.0015, 0.0015, 0.0015], [0.001, 0.001, 0.001], "Three Text");
+  handleObjectInteraction(insulinObject, [.0045, .0045, .0045], [.004, .004, .004], "Insulin Text");
 
 
   // if (blenderObject) {
