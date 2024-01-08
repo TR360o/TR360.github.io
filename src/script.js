@@ -849,6 +849,21 @@ const interactionManager = new InteractionManager(
   renderer.domElement
 );
 
+envelopeObject.addEventListener('click', (event) => {
+  console.log("hallo")
+  event.target.scale.set(0.04, 0.04, 0.04);
+});
+scene.add(envelopeObject);
+interactionManager.add(envelopeObject);
+
+
+threeObject.addEventListener('click', (event) => {
+  console.log("hallo")
+  event.target.scale.set(0.0015, 0.0015, 0.0015);
+});
+scene.add(threeObject);
+interactionManager.add(threeObject);
+
 tomatoObject.addEventListener('click', (event) => {
   console.log("hallo")
   event.target.scale.set(1.5, 1.5, 1.5);
@@ -864,7 +879,6 @@ scene.add(blenderObject);
 interactionManager.add(blenderObject);
 
 
-
 insulinObject.addEventListener('click', (event) => {
   console.log("hallo")
   event.target.scale.set(.006, .006, .006);
@@ -874,6 +888,7 @@ interactionManager.add(insulinObject);
 
 
 interactionManager.update();
+
 const clock = new THREE.Clock();
 
 let currentIntersect = null
