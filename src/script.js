@@ -12,7 +12,7 @@ import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
-
+import { InteractionManager } from 'three.interactive';
 // Scene & renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -837,6 +837,43 @@ window.addEventListener('scroll', onScroll);
 document.body.onscroll = moveCamera;
 moveCamera();
 
+
+
+
+
+
+
+const interactionManager = new InteractionManager(
+  renderer,
+  camera,
+  renderer.domElement
+);
+
+tomatoObject.addEventListener('click', (event) => {
+  console.log("hallo")
+  event.target.scale.set(1.5, 1.5, 1.5);
+});
+scene.add(tomatoObject);
+interactionManager.add(tomatoObject);
+
+blenderObject.addEventListener('click', (event) => {
+  console.log("hallo")
+  event.target.scale.set(.006, .006, .006);
+});
+scene.add(blenderObject);
+interactionManager.add(blenderObject);
+
+
+
+insulinObject.addEventListener('click', (event) => {
+  console.log("hallo")
+  event.target.scale.set(.006, .006, .006);
+});
+scene.add(insulinObject);
+interactionManager.add(insulinObject);
+
+
+interactionManager.update();
 const clock = new THREE.Clock();
 
 let currentIntersect = null
@@ -866,27 +903,50 @@ const tick = () => {
 
   //   currentIntersect = null
   // }
-  function handleObjectInteraction(object, scaleFactor, defaultScaleFactor, popupText) {
-    if (object) {
-      const modelIntersects = raycaster.intersectObject(object);
 
-      if (modelIntersects.length) {
-        console.log("hit");
-        object.scale.set(...scaleFactor);
-        alert(popupText); // Display popup with the specified text
-      } else {
-        console.log("not hit");
-        object.scale.set(...defaultScaleFactor);
-      }
-    }
-  }
 
-  handleObjectInteraction(tomatoObject, [1.2, 1.2, 1.2], [1, 1, 1], "Tomato Text");
-  handleObjectInteraction(blenderObject, [0.02, 0.02, 0.02], [0.01, 0.01, 0.01], "Blender Text");
-  handleObjectInteraction(fractalObject, [11, 11, 11], [10, 10, 10], "Fractal Text");
-  handleObjectInteraction(envelopeObject, [0.04, 0.04, 0.04], [0.03, 0.03, 0.03], "Envelope Text");
-  handleObjectInteraction(threeObject, [0.0015, 0.0015, 0.0015], [0.001, 0.001, 0.001], "Three Text");
-  handleObjectInteraction(insulinObject, [.0045, .0045, .0045], [.004, .004, .004], "Insulin Text");
+
+  // const interactionManager = new InteractionManager(
+  //   renderer,
+  //   camera,
+  //   renderer.domElement
+  // );
+
+  // tomatoObject.addEventListener('click', (event) => {
+  //   console.log("hallo")
+  //   event.target.scale.set(1.5, 1.5, 1.5);
+  // });
+  // scene.add(tomatoObject);
+  // interactionManager.add(tomatoObject);
+
+
+  // insulinObject.addEventListener('click', (event) => {
+  //   console.log("hallo")
+  //   event.target.scale.set(.004, .004, .004);
+  // });
+  // scene.add(insulinObject);
+  // interactionManager.add(insulinObject);
+  // function handleObjectInteraction(object, scaleFactor, defaultScaleFactor, popupText) {
+  //   if (object) {
+  //     const modelIntersects = raycaster.intersectObject(object);
+
+  //     if (modelIntersects.length) {
+  //       // console.log("hit");
+  //       object.scale.set(...scaleFactor);
+  //       // alert(popupText); // Display popup with the specified text
+  //     } else {
+  //       // console.log("not hit");
+  //       object.scale.set(...defaultScaleFactor);
+  //     }
+  //   }
+  // }
+
+  // handleObjectInteraction(tomatoObject, [1.2, 1.2, 1.2], [1, 1, 1], "Tomato Text");
+  // handleObjectInteraction(blenderObject, [0.02, 0.02, 0.02], [0.01, 0.01, 0.01], "Blender Text");
+  // handleObjectInteraction(fractalObject, [11, 11, 11], [10, 10, 10], "Fractal Text");
+  // handleObjectInteraction(envelopeObject, [0.04, 0.04, 0.04], [0.03, 0.03, 0.03], "Envelope Text");
+  // handleObjectInteraction(threeObject, [0.0015, 0.0015, 0.0015], [0.001, 0.001, 0.001], "Three Text");
+  // handleObjectInteraction(insulinObject, [.0045, .0045, .0045], [.004, .004, .004], "Insulin Text");
 
 
   // if (blenderObject) {
@@ -946,7 +1006,7 @@ const tick = () => {
   // }
   // Update controls
   //controls.update()
-
+  // interactionManager.update();
   // Render
   renderer.render(scene, camera)
 
