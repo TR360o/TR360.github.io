@@ -51,13 +51,15 @@ var borderX = 0.02;
 // /* 3D models
 //   */
 //fractal
+let fractalObject = null;
 const loader = new GLTFLoader();
 loader.load(
   "/assets/fractal1/scene.gltf",
-  function (gltf) {
-    gltf.scene.scale.set(10, 10, 10);
-    gltf.scene.position.set(positionXColumn3, positionYrow1 + 3, 0);
-    scene.add(gltf.scene);
+  function (fractal) {
+    fractalObject = fractal.scene;
+    fractal.scene.scale.set(10, 10, 10);
+    fractal.scene.position.set(positionXColumn3, positionYrow1 + 3, 0);
+    scene.add(fractal.scene);
   },
   function (xhr) {
     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -69,12 +71,15 @@ loader.load(
 );
 
 //Blender
+let blenderObject = null;
 loader.load(
   "/assets/blender/scene.gltf",
-  function (gltf) {
-    gltf.scene.scale.set(0.01, 0.01, 0.01);
-    gltf.scene.position.set(positionXColumn2, positionYrow1, 0);
-    scene.add(gltf.scene);
+  function (blender) {
+    blenderObject = blender.scene;
+    blender.scene.scale.set(0.01, 0.01, 0.01);
+    blender.scene.position.set(positionXColumn2, positionYrow1, 0);
+    console.log(blender.scene)
+    scene.add(blender.scene);
   },
   function (xhr) {
     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -121,16 +126,20 @@ loader.load(
 
 );
 
+//envelope
+
 
 const fbxLoader = new FBXLoader()
+let envelopeObject = null;
 fbxLoader.load(
   'assets/envelope/letter5.fbx',
-  (object) => {
+  (envelope) => {
+    envelopeObject = envelope;
     // object.scale.set(.01, .01, .01)
-    object.scale.set(.03, .03, .03);
-    object.rotateY(Math.PI / -2);
-    object.position.set(positionXColumn1, positionYrow2, 0);
-    scene.add(object)
+    envelope.scale.set(.03, .03, .03);
+    envelope.rotateY(Math.PI / -2);
+    envelope.position.set(positionXColumn1, positionYrow2, 0);
+    scene.add(envelope)
   },
   (xhr) => {
     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
@@ -141,14 +150,16 @@ fbxLoader.load(
 )
 
 //three model
+let threeObject = null;
 fbxLoader.load(
   'assets/three/three.fbx',
-  (object) => {
+  (three) => {
+    threeObject = three;
     // object.scale.set(.01, .01, .01)
-    object.scale.set(.001, .001, .001);
-    object.rotateY(Math.PI / -2015);
-    object.position.set(positionXColumn2 - 1, positionYrow2, 0);
-    scene.add(object)
+    three.scale.set(.001, .001, .001);
+    three.rotateY(Math.PI / -2015);
+    three.position.set(positionXColumn2 - 1, positionYrow2, 0);
+    scene.add(three)
   },
   (xhr) => {
     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
@@ -854,20 +865,83 @@ const tick = () => {
   //   currentIntersect = null
   // }
 
+  function handleObjectInteraction(object, scaleFactor, defaultScaleFactor) {
+    if (object) {
+      const modelIntersects = raycaster.intersectObject(object);
 
-  if (tomatoObject) {
-    const modelIntersects = raycaster.intersectObject(tomatoObject)
+      if (modelIntersects.length) {
+        console.log("hit");
 
-    if (modelIntersects.length) {
-      console.log("hit")
-      tomatoObject.scale.set(1.2, 1.2, 1.2)
-    }
-    else {
-      console.log("not hit")
-      tomatoObject.scale.set(1, 1, 1)
+        object.scale.set(...scaleFactor);
+      } else {
+        console.log("not hit");
+        object.scale.set(...defaultScaleFactor);
+      }
     }
   }
 
+  handleObjectInteraction(tomatoObject, [1.2, 1.2, 1.2], [1, 1, 1], 1);
+  handleObjectInteraction(blenderObject, [0.02, 0.02, 0.02], [0.01, 0.01, 0.01]);
+  handleObjectInteraction(fractalObject, [11, 11, 11], [10, 10, 10]);
+  handleObjectInteraction(envelopeObject, [0.04, 0.04, 0.04], [0.03, 0.03, 0.03]);
+  handleObjectInteraction(threeObject, [0.0015, 0.0015, 0.0015], [0.001, 0.001, 0.001]);
+
+
+  // if (blenderObject) {
+  //   const modelIntersects = raycaster.intersectObject(blenderObject)
+  //   //Make this intersectObjects
+
+  //   if (modelIntersects.length) {
+  //     console.log("hit")
+  //     blenderObject.scale.set(0.02, 0.02, 0.02)
+  //   }
+  //   else {
+  //     console.log("not hit")
+  //     blenderObject.scale.set(0.01, 0.01, 0.01)
+  //   }
+  // }
+
+  // if (fractalObject) {
+  //   const modelIntersects = raycaster.intersectObject(fractalObject)
+  //   //Make this intersectObjects
+
+  //   if (modelIntersects.length) {
+  //     console.log("hit")
+  //     fractalObject.scale.set(11, 11, 11)
+  //   }
+  //   else {
+  //     console.log("not hit")
+  //     fractalObject.scale.set(10, 10, 10)
+  //   }
+  // }
+
+  // if (envelopeObject) {
+  //   const modelIntersects = raycaster.intersectObject(envelopeObject)
+  //   //Make this intersectObjects
+
+  //   if (modelIntersects.length) {
+  //     console.log("hit")
+  //     envelopeObject.scale.set(.04, .04, .04)
+  //   }
+  //   else {
+  //     console.log("not hit")
+  //     envelopeObject.scale.set(.03, .03, .03)
+  //   }
+  // }
+
+  // if (threeObject) {
+  //   const modelIntersects = raycaster.intersectObject(threeObject)
+  //   //Make this intersectObjects
+
+  //   if (modelIntersects.length) {
+  //     console.log("hit")
+  //     threeObject.scale.set(.0015, .0015, .0015)
+  //   }
+  //   else {
+  //     console.log("not hit")
+  //     threeObject.scale.set(.001, .001, .001)
+  //   }
+  // }
   // Update controls
   //controls.update()
 
@@ -878,33 +952,23 @@ const tick = () => {
   window.requestAnimationFrame(tick)
 
 
-  // torus.rotation.x += 0.01;
-  // torus.rotation.y += 0.01;
+  torus.rotation.x += 0.01;
+  torus.rotation.y += 0.01;
 
-  // const speedMultiplier = 2;
-  // const amplitude = 0.005;
+  const speedMultiplier = 2;
+  const amplitude = 0.005;
 
-  // triangle.position.y += Math.sin(elapsedTime * speedMultiplier) * amplitude;
+  triangle.position.y += Math.sin(elapsedTime * speedMultiplier) * amplitude;
 
-  // // Check if the scrollX is less than the maximum threshold
-  // if (scrollX < maxScrollX) {
-  //   cube.position.x = 60 - scrollX;
-  // }
-
-
-  // const speedMultiplierp = 2;
-  // const amplitudep = 0.005;
-
-  // if (tomatoIntersects.length > 0) { // check the array
-
-  //   if (tomatoIntersects[0].object.name == 'tomatoObject') { // check the name of the object
-
-  //     console.log('Mouse is over')
-  //   } else {
+  // Check if the scrollX is less than the maximum threshold
+  if (scrollX < maxScrollX) {
+    cube.position.x = 60 - scrollX;
+  }
 
 
-  //     console.log('Mouse is off')
-  //   }
+  const speedMultiplierp = 2;
+  const amplitudep = 0.005;
+
 }
 
 
