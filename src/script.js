@@ -51,24 +51,9 @@ var borderX = 0.02;
 // /* 3D models
 //   */
 //fractal
-let fractalObject = null;
-const loader = new GLTFLoader();
-loader.load(
-  "/assets/fractal1/scene.gltf",
-  function (fractal) {
-    fractalObject = fractal.scene;
-    fractal.scene.scale.set(10, 10, 10);
-    fractal.scene.position.set(positionXColumn3, positionYrow1 + 3, 0);
-    scene.add(fractal.scene);
-  },
-  function (xhr) {
-    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-  },
-  function (error) {
-    console.log("An error happened");
-  }
 
-);
+const loader = new GLTFLoader();
+
 
 //Blender
 let blenderObject = null;
@@ -79,7 +64,7 @@ loader.load(
     blender.scene.scale.set(0.01, 0.01, 0.01);
     blender.scene.position.set(positionXColumn2, positionYrow1, 0);
     console.log(blender.scene)
-    scene.add(blender.scene);
+
   },
   function (xhr) {
     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -139,10 +124,29 @@ fbxLoader.load(
     envelope.scale.set(.03, .03, .03);
     envelope.rotateY(Math.PI / -2);
     envelope.position.set(positionXColumn1, positionYrow2, 0);
-    scene.add(envelope)
+
   },
   (xhr) => {
     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+  },
+  (error) => {
+    console.log(error)
+  }
+)
+
+let fractalObject = null;
+fbxLoader.load(
+  'assets/fractal/fractal10.fbx',
+  (fractal) => {
+    fractalObject = fractal;
+    fractal.scale.set(0.8, 0.8, 0.6)
+    // fractal.scale.set(.03, .03, .03);
+    fractal.rotateY(Math.PI / 8);
+    fractal.position.set(20, -93, 0);
+
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded fractal')
   },
   (error) => {
     console.log(error)
@@ -159,7 +163,7 @@ fbxLoader.load(
     three.scale.set(.001, .001, .001);
     three.rotateY(Math.PI / -2015);
     three.position.set(positionXColumn2 - 1, positionYrow2, 0);
-    scene.add(three)
+
   },
   (xhr) => {
     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
@@ -179,7 +183,7 @@ fbxLoader.load(
     insulin.rotateZ(Math.PI / -4);
     insulin.rotateX(Math.PI / 2);
     insulin.position.set(positionXColumn3 - 1, positionYrow2, 0);
-    scene.add(insulin)
+
   },
   (xhr) => {
     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
@@ -202,7 +206,7 @@ fbxLoader.load(
     tomato.rotateX(Math.PI / 5); // Adjust the angle as needed
     tomato.position.set(positionXColumn1, positionYrow1 + 1, 0);
     console.log(tomatoObject)
-    scene.add(tomato)
+
   },
   (xhr) => {
     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
@@ -495,10 +499,10 @@ scene.add(obj);
 
 
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 2.4)
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.4)
 scene.add(ambientLight)
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1.8)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
 directionalLight.castShadow = true
 directionalLight.shadow.mapSize.set(1024, 1024)
 directionalLight.shadow.camera.far = 15
@@ -885,6 +889,14 @@ insulinObject.addEventListener('click', (event) => {
 });
 scene.add(insulinObject);
 interactionManager.add(insulinObject);
+
+
+fractalObject.addEventListener('click', (event) => {
+  console.log("hallo")
+  event.target.scale.set(1, 1, 1);
+});
+scene.add(fractalObject);
+interactionManager.add(fractalObject);
 
 
 interactionManager.update();
