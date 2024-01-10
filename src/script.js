@@ -1,3 +1,5 @@
+
+
 // import "./style.css";
 
 // import * as dat from "dat.gui";
@@ -93,23 +95,24 @@ loader.load(
 
 );
 
-//instagram
+// //instagram
+// let instagramObject = null;
+// loader.load(
+//   "/assets/insta/scene.gltf",
+//   function (gltf) {
+//     instagramObject = insta;
+//     gltf.scene.scale.set(.9, .9, .9);
+//     gktf.scene.position.set(-10, positionYContact - 3, 0);
+//     scene.add(insta);
+//   },
+//   function (xhr) {
+//     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+//   },
+//   function (error) {
+//     console.log("An error happened");
+//   }
 
-loader.load(
-  "/assets/insta/scene.gltf",
-  function (gltf) {
-    gltf.scene.scale.set(.9, .9, .9);
-    gltf.scene.position.set(-10, positionYContact - 3, 0);
-    scene.add(gltf.scene);
-  },
-  function (xhr) {
-    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-  },
-  function (error) {
-    console.log("An error happened");
-  }
-
-);
+// );
 
 //envelope
 
@@ -252,22 +255,6 @@ function onMouseMove(event) {
     }
   }
 }
-
-var tomatoIntersects = raycaster.intersectObjects(scene.children, true);
-
-// if (tomatoIntersects.length > 0) { // check the array
-
-//   if (tomatoIntersects[0].object.name == 'tomatoObject') { // check the name of the object
-//     container.style.cursor = 'pointer';
-//     console.log('Mouse is over')
-//   } else {
-
-//     container.style.cursor = 'auto';
-//     console.log('Mouse is off')
-//   }
-// }
-
-
 // Load Border Objects
 function loadBorderObject(filePath, position, rotation) {
   fbxLoader.load(
@@ -312,167 +299,6 @@ const borderObjects = [
 borderObjects.forEach((border) => {
   loadBorderObject(border.filePath, border.position, border.rotation);
 });
-
-
-
-// //Borders
-
-
-// // Create a raycaster
-// const raycaster = new THREE.Raycaster();
-// const mouse = new THREE.Vector2();
-
-// // Add a listener for mousemove event
-// document.addEventListener('mousemove', onMouseMove, false);
-
-// function onMouseMove(event) {
-//   // Calculate mouse coordinates in normalized device coordinates (NDC)
-//   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-//   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-//   // Update the raycaster with the mouse coordinates
-//   raycaster.setFromCamera(mouse, camera);
-
-//   // Check for intersections
-//   const intersects = raycaster.intersectObjects(scene.children, true);
-
-//   // Reset opacity for all objects in the scene
-//   scene.traverse((child) => {
-//     if (child.isMesh) {
-//       child.material.opacity = 0;
-//     }
-//   });
-
-//   // Set opacity to 1 for the intersected object (if any)
-//   if (intersects.length > 0) {
-//     const object = intersects[0].object;
-//     if (object.isMesh) {
-//       object.material.opacity = 1;
-//     }
-//   }
-// }
-
-
-
-// /// Load the FBX file
-// fbxLoader.load(
-//   'assets/border/border.fbx',
-//   (object) => {
-//     // Set the scale, rotation, and position
-//     object.scale.set(borderX, 0.1, 0.1);
-//     object.rotateY(Math.PI / 2);
-//     object.position.set(-20, -93, 0);
-
-//     // Change opacity
-//     object.traverse((child) => {
-//       if (child.isMesh) {
-//         // Assuming the material is a MeshStandardMaterial
-//         // You may need to adapt this based on your actual material type
-//         child.material.transparent = true;
-//         child.material.opacity = 0; // Set your desired opacity value (0.0 to 1.0)
-//       }
-//     });
-
-//     // Add the object to the scene
-//     scene.add(object);
-//   },
-//   (xhr) => {
-//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-//   },
-//   (error) => {
-//     console.log(error);
-//   }
-// );
-
-
-
-// //Border Tomato
-// fbxLoader.load(
-//   'assets/border/border.fbx',
-//   (object) => {
-//     object.scale.set(borderX, .1, .1)
-//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
-//     object.position.set(0, -93, 0);
-//     scene.add(object)
-//   },
-//   (xhr) => {
-//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-//   },
-//   (error) => {
-//     console.log(error)
-//   }
-// )
-
-
-// //border insulin
-// fbxLoader.load(
-//   'assets/border/border.fbx',
-//   (object) => {
-//     object.scale.set(borderX, .1, .1)
-//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
-//     object.position.set(20, positionYrow2, 0);
-//     scene.add(object)
-//   },
-//   (xhr) => {
-//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-//   },
-//   (error) => {
-//     console.log(error)
-//   }
-// )
-
-
-// //border three
-// fbxLoader.load(
-//   'assets/border/border.fbx',
-//   (object) => {
-//     object.scale.set(borderX, .1, .1)
-//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
-//     object.position.set(positionXColumn2, positionYrow2, 0);
-//     scene.add(object)
-//   },
-//   (xhr) => {
-//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-//   },
-//   (error) => {
-//     console.log(error)
-//   }
-// )
-
-// //border envelope
-// fbxLoader.load(
-//   'assets/border/border.fbx',
-//   (object) => {
-//     object.scale.set(borderX, .1, .1)
-//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
-//     object.position.set(positionXColumn1, positionYrow2, 0);
-//     scene.add(object)
-//   },
-//   (xhr) => {
-//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-//   },
-//   (error) => {
-//     console.log(error)
-//   }
-// )
-
-// //border envelope
-// fbxLoader.load(
-//   'assets/border/border.fbx',
-//   (object) => {
-//     object.scale.set(borderX, .1, .1)
-//     object.rotateY(Math.PI / 2); // Adjust the angle as needed
-//     object.position.set(20, -93, 0);
-//     scene.add(object)
-//   },
-//   (xhr) => {
-//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-//   },
-//   (error) => {
-//     console.log(error)
-//   }
-// )
-
 
 const objTextureLoader = new THREE.TextureLoader();
 const objLoader = new OBJLoader();
@@ -695,8 +521,6 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial);
   textH1.position.y = -75;
   textH1.position.x = positionX;
-  // const rotationAngle = Math.PI / -6;
-  // textH1.rotation.y = rotationAngle;
   textGroup3.add(textH1);
 
 
@@ -709,21 +533,6 @@ var cube = new THREE.Mesh(cgeometry, material);
 textGroup2.add(cube);
 
 cube.position.y = -47;
-
-
-
-
-// const worksGeometry = new THREE.BoxGeometry(1, 1, 1);
-// const worksMaterial = new THREE.MeshBasicMaterial({
-//   color: 0x00ff00,
-// });
-
-// const worksCube1 = new THREE.Mesh(worksGeometry, worksMaterial);
-// textGroup3.add(worksCube1);
-
-
-
-// Group3 works
 
 
 fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
@@ -754,33 +563,6 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
 
 
 });
-
-
-
-
-
-// const loader = new GLTFLoader();
-// loader.load('src/assets/gmail/scene.gltf',
-
-//   function (gltf) {
-//     scene.add(gltf.scene);
-
-//     gltf.animations; // Array<THREE.AnimationClip>
-//     gltf.scene; // THREE.Group
-//     gltf.scenes; // Array<THREE.Group>
-//     gltf.cameras; // Array<THREE.Camera>
-//     gltf.asset; // Object
-//   },
-//   function (xhr) {
-//     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-//   },
-//   function (error) {
-//     console.log('An error happened');
-//   }
-// );
-
-
-
 
 /**
  * Sizes
@@ -853,50 +635,67 @@ const interactionManager = new InteractionManager(
   renderer.domElement
 );
 
+///
+///Works Models click
+///
+function openPopup(text) {
+  // Replace this function with your actual code to open a popup with the given text
+  alert(text);
+}
+
 envelopeObject.addEventListener('click', (event) => {
-  console.log("hallo")
-  event.target.scale.set(0.04, 0.04, 0.04);
+  openPopup("Envelope Object Clicked");
 });
+
 scene.add(envelopeObject);
 interactionManager.add(envelopeObject);
 
-
 threeObject.addEventListener('click', (event) => {
-  console.log("hallo")
-  event.target.scale.set(0.0015, 0.0015, 0.0015);
+  openPopup("Three Object Clicked");
 });
+
 scene.add(threeObject);
 interactionManager.add(threeObject);
 
 tomatoObject.addEventListener('click', (event) => {
-  console.log("hallo")
-  event.target.scale.set(1.5, 1.5, 1.5);
+  openPopup("Tomato Object Clicked");
 });
+
 scene.add(tomatoObject);
 interactionManager.add(tomatoObject);
 
 blenderObject.addEventListener('click', (event) => {
-  console.log("hallo")
-  event.target.scale.set(.006, .006, .006);
+  openPopup("Blender Object Clicked");
 });
+
 scene.add(blenderObject);
 interactionManager.add(blenderObject);
 
-
 insulinObject.addEventListener('click', (event) => {
-  console.log("hallo")
-  event.target.scale.set(.006, .006, .006);
+  openPopup("Insulin Object Clicked");
 });
+
 scene.add(insulinObject);
 interactionManager.add(insulinObject);
 
 
-fractalObject.addEventListener('click', (event) => {
-  console.log("hallo")
-  event.target.scale.set(1, 1, 1);
-});
-scene.add(fractalObject);
-interactionManager.add(fractalObject);
+
+// fractalObject.addEventListener('click', (event) => {
+//   console.log("hallo")
+//   event.target.scale.set(1, 1, 1);
+// });
+// scene.add(fractalObject);
+// interactionManager.add(fractalObject);
+
+///
+///Contact Models click
+///
+// insulinObject.addEventListener('click', (event) => {
+//   console.log("hallo")
+//   event.target.scale.set(.006, .006, .006);
+// });
+// scene.add(insulinObject);
+// interactionManager.add(insulinObject);
 
 
 interactionManager.update();
@@ -911,130 +710,6 @@ const tick = () => {
 
   raycaster.setFromCamera(mouse, camera);
 
-  // const objectsToTest = [tomatoObject]
-
-
-  // var intersects = raycaster.intersectObject(tomatoObject);
-
-  // if (intersects.length) {
-  //   if (!currentIntersect) {
-  //     console.log('mouse enter')
-  //   }
-
-  //   currentIntersect = intersects[0]
-  // }
-  // else {
-  //   if (currentIntersect) {
-  //     console.log('mouse leave')
-  //   }
-
-  //   currentIntersect = null
-  // }
-
-
-
-  // const interactionManager = new InteractionManager(
-  //   renderer,
-  //   camera,
-  //   renderer.domElement
-  // );
-
-  // tomatoObject.addEventListener('click', (event) => {
-  //   console.log("hallo")
-  //   event.target.scale.set(1.5, 1.5, 1.5);
-  // });
-  // scene.add(tomatoObject);
-  // interactionManager.add(tomatoObject);
-
-
-  // insulinObject.addEventListener('click', (event) => {
-  //   console.log("hallo")
-  //   event.target.scale.set(.004, .004, .004);
-  // });
-  // scene.add(insulinObject);
-  // interactionManager.add(insulinObject);
-  // function handleObjectInteraction(object, scaleFactor, defaultScaleFactor, popupText) {
-  //   if (object) {
-  //     const modelIntersects = raycaster.intersectObject(object);
-
-  //     if (modelIntersects.length) {
-  //       // console.log("hit");
-  //       object.scale.set(...scaleFactor);
-  //       // alert(popupText); // Display popup with the specified text
-  //     } else {
-  //       // console.log("not hit");
-  //       object.scale.set(...defaultScaleFactor);
-  //     }
-  //   }
-  // }
-
-  // handleObjectInteraction(tomatoObject, [1.2, 1.2, 1.2], [1, 1, 1], "Tomato Text");
-  // handleObjectInteraction(blenderObject, [0.02, 0.02, 0.02], [0.01, 0.01, 0.01], "Blender Text");
-  // handleObjectInteraction(fractalObject, [11, 11, 11], [10, 10, 10], "Fractal Text");
-  // handleObjectInteraction(envelopeObject, [0.04, 0.04, 0.04], [0.03, 0.03, 0.03], "Envelope Text");
-  // handleObjectInteraction(threeObject, [0.0015, 0.0015, 0.0015], [0.001, 0.001, 0.001], "Three Text");
-  // handleObjectInteraction(insulinObject, [.0045, .0045, .0045], [.004, .004, .004], "Insulin Text");
-
-
-  // if (blenderObject) {
-  //   const modelIntersects = raycaster.intersectObject(blenderObject)
-  //   //Make this intersectObjects
-
-  //   if (modelIntersects.length) {
-  //     console.log("hit")
-  //     blenderObject.scale.set(0.02, 0.02, 0.02)
-  //   }
-  //   else {
-  //     console.log("not hit")
-  //     blenderObject.scale.set(0.01, 0.01, 0.01)
-  //   }
-  // }
-
-  // if (fractalObject) {
-  //   const modelIntersects = raycaster.intersectObject(fractalObject)
-  //   //Make this intersectObjects
-
-  //   if (modelIntersects.length) {
-  //     console.log("hit")
-  //     fractalObject.scale.set(11, 11, 11)
-  //   }
-  //   else {
-  //     console.log("not hit")
-  //     fractalObject.scale.set(10, 10, 10)
-  //   }
-  // }
-
-  // if (envelopeObject) {
-  //   const modelIntersects = raycaster.intersectObject(envelopeObject)
-  //   //Make this intersectObjects
-
-  //   if (modelIntersects.length) {
-  //     console.log("hit")
-  //     envelopeObject.scale.set(.04, .04, .04)
-  //   }
-  //   else {
-  //     console.log("not hit")
-  //     envelopeObject.scale.set(.03, .03, .03)
-  //   }
-  // }
-
-  // if (threeObject) {
-  //   const modelIntersects = raycaster.intersectObject(threeObject)
-  //   //Make this intersectObjects
-
-  //   if (modelIntersects.length) {
-  //     console.log("hit")
-  //     threeObject.scale.set(.0015, .0015, .0015)
-  //   }
-  //   else {
-  //     console.log("not hit")
-  //     threeObject.scale.set(.001, .001, .001)
-  //   }
-  // }
-  // Update controls
-  //controls.update()
-  // interactionManager.update();
-  // Render
   renderer.render(scene, camera)
 
   // Call tick again on the next frame
@@ -1059,11 +734,4 @@ const tick = () => {
   const amplitudep = 0.005;
 
 }
-
-
-
-// // Animate pCube based on scrollX
-// pCube.position.x = Math.min(70, 90 - scrollX);
-// pCube.position.y = -82 + Math.sin(elapsedTime * speedMultiplierp) * amplitudep;
-
 tick();

@@ -1,0 +1,48 @@
+const interactionManager = new InteractionManager(
+renderer,
+camera,
+renderer.domElement
+);
+
+///
+///Works Models click
+///
+function openPopup(text) {
+// Replace this function with your actual code to open a popup with the given text
+alert(text);
+}
+
+envelopeObject.addEventListener('click', (event) => {
+openPopup("Envelope Object Clicked");
+});
+
+scene.add(envelopeObject);
+interactionManager.add(envelopeObject);
+
+threeObject.addEventListener('click', (event) => {
+openPopup("Three Object Clicked");
+});
+
+scene.add(threeObject);
+interactionManager.add(threeObject);
+
+tomatoObject.addEventListener('click', (event) => {
+openPopup("Tomato Object Clicked");
+});
+
+scene.add(tomatoObject);
+interactionManager.add(tomatoObject);
+
+blenderObject.addEventListener('click', (event) => {
+openPopup("Blender Object Clicked");
+});
+
+scene.add(blenderObject);
+interactionManager.add(blenderObject);
+
+insulinObject.addEventListener('click', (event) => {
+openPopup("Insulin Object Clicked");
+});
+
+scene.add(insulinObject);
+interactionManager.add(insulinObject);
