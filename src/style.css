@@ -29,6 +29,65 @@ main {
   margin-top: 200px;
 }
 
+.modal::backdrop {
+  background: rgb(0 0 0 / 0.4);
+}
+
+h1 em {
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.button {
+  border: 0;
+  cursor: pointer;
+  background: var(--gray-8);
+  color: white;
+  font-size: 80px;
+  font-weight: 700;
+  padding: var(--size-2) var(--size-4);
+}
+
+.button:hover,
+.button:focus {
+  background: var(--cyan-9);
+}
+
+dialog {
+  background: black;
+  height: 100vh;
+  width: 100vw;
+
+}
+
+h1 {
+
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing);
+
+}
+
+h2 {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing);
+}
+
+p {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing);
+}
+
+form {
+  display: grid;
+  gap: 1em;
+}
 
 /* header {
   background: var(--dark-bg);
@@ -76,7 +135,7 @@ section {
 
 p {
   color: white;
-  cursor: default;
+  /* cursor: default; */
 }
 
 #contact {
@@ -89,4 +148,38 @@ p {
   margin-left: 20px;
   max-width: 550px;
   opacity: 0;
+}
+
+/* .bodypopUp {
+  position: fixed;
+
+  height: 100vh;
+
+} */
+
+.container {
+  padding-top: 70px;
+  margin: 0 auto;
+  max-width: 1000px;
+  overflow-y: scroll;
+  background-color: blue;
+
+}
+
+/* .container::-webkit-scrollbar {
+  display: none;
+} */
+
+/* .container { */
+/* scrollbar-width: none; */
+/* Firefox */
+/* -ms-overflow-style: none; */
+/* IE and Edge */
+/* } */
+
+.H1Modal {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing);
 }

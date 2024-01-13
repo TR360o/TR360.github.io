@@ -624,11 +624,6 @@ document.body.onscroll = moveCamera;
 moveCamera();
 
 
-
-
-
-
-
 const interactionManager = new InteractionManager(
   renderer,
   camera,
@@ -636,69 +631,65 @@ const interactionManager = new InteractionManager(
 );
 
 ///
-///Works Models click
-///
-function openPopup(text) {
-  // Replace this function with your actual code to open a popup with the given text
-  alert(text);
+///Works Models click C:\Users\trudo\Documents\codeBackUp\TR360o.github.io\TR360o.github.io\src\tomatoObject.html
+// 
+function openPopup(objectName) {
+  const modal = document.querySelector("#modal");
+  const modalTitle = document.querySelector("#modal-title");
+  const modalContent = document.querySelector("#modal-content");
+
+  // Make an AJAX request to fetch the specific object's content
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "/" + objectName.toLowerCase() + ".html", true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      const response = xhr.responseText;
+
+      // Set modal title
+
+
+      // Set modal content
+      modalContent.innerHTML = response;
+
+      modal.showModal();
+    }
+  };
+  xhr.send();
+  console.log(objectName)
 }
 
-envelopeObject.addEventListener('click', (event) => {
-  openPopup("Envelope Object Clicked");
-});
 
+// Add event listeners for each object
+envelopeObject.addEventListener('click', () => openPopup("envelopeObject"));
 scene.add(envelopeObject);
 interactionManager.add(envelopeObject);
 
-threeObject.addEventListener('click', (event) => {
-  openPopup("Three Object Clicked");
-});
-
+threeObject.addEventListener('click', () => openPopup("threeObject"));
 scene.add(threeObject);
 interactionManager.add(threeObject);
 
-tomatoObject.addEventListener('click', (event) => {
-  openPopup("Tomato Object Clicked");
-});
-
+tomatoObject.addEventListener('click', () => openPopup("tomatoObject"));
 scene.add(tomatoObject);
 interactionManager.add(tomatoObject);
 
-blenderObject.addEventListener('click', (event) => {
-  openPopup("Blender Object Clicked");
-});
+// blenderObject.addEventListener('click', () => openPopup("Blender Object"));
+// scene.add(blenderObject);
+// interactionManager.add(blenderObject);
 
-scene.add(blenderObject);
-interactionManager.add(blenderObject);
-
-insulinObject.addEventListener('click', (event) => {
-  openPopup("Insulin Object Clicked");
-});
-
-scene.add(insulinObject);
-interactionManager.add(insulinObject);
-
-
-
-// fractalObject.addEventListener('click', (event) => {
-//   console.log("hallo")
-//   event.target.scale.set(1, 1, 1);
-// });
-// scene.add(fractalObject);
-// interactionManager.add(fractalObject);
-
-///
-///Contact Models click
-///
-// insulinObject.addEventListener('click', (event) => {
-//   console.log("hallo")
-//   event.target.scale.set(.006, .006, .006);
-// });
+// insulinObject.addEventListener('click', () => openPopup("Insulin Object"));
 // scene.add(insulinObject);
 // interactionManager.add(insulinObject);
 
+// fractalObject.addEventListener('click', () => {
+//   console.log("hallo");
+//   event.target.scale.set(1, 1, 1);
+//   openPopup("Fractal Object");
+// });
+// scene.add(fractalObject);
+interactionManager.add(fractalObject);
 
 interactionManager.update();
+
 
 const clock = new THREE.Clock();
 
