@@ -1,48 +1,63 @@
-const interactionManager = new InteractionManager(
-renderer,
-camera,
-renderer.domElement
-);
+<!DOCTYPE html>
+<html lang="en">
 
-///
-///Works Models click
-///
-function openPopup(text) {
-// Replace this function with your actual code to open a popup with the given text
-alert(text);
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agra</title>
 
-envelopeObject.addEventListener('click', (event) => {
-openPopup("Envelope Object Clicked");
-});
+</head>
 
-scene.add(envelopeObject);
-interactionManager.add(envelopeObject);
+<body>
+    <div class="container">
+        <h1> Fractal Love
+        </h1>
+        <h2>A generative art work </h2>
 
-threeObject.addEventListener('click', (event) => {
-openPopup("Three Object Clicked");
-});
+        <video width="100%" controls>
+            <source src="/video/movie1.mp4" type="video/mp4">
+        </video>
+        <h3>Capture of Fractal Love</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero modi laudantium laborum, corporis, odit
+            architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut fuga tenetur
+            quidem dolor. architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut
+            fuga tenetur. architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut
+            fuga tenetur.6</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero modi laudantium laborum, corporis, odit
+            architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut fuga tenetur
+            quidem dolor.</p>
 
-scene.add(threeObject);
-interactionManager.add(threeObject);
+        <img src="/img/agra1.png" alt="Description of the image" width="100%">
+        <h3>Screen shot van AGRA</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero modi laudantium laborum, corporis, odit
+            architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut fuga tenetur
+            quidem dolor. architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut
+            fuga tenetur. architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut
+            fuga tenetur.6</p>
 
-tomatoObject.addEventListener('click', (event) => {
-openPopup("Tomato Object Clicked");
-});
+        <div class="column">
+            <img src="/img/agra1.png" alt="Snow" style="width:100%">
+            <h3>Screen shot van AGRA</h3>
+        </div>
+        <div class="column">
+            <img src="/img/agra1.png" alt="Snow" style="width:100%">
+            <h3>Screen shot van AGRA</h3>
+        </div>
+        <div class="clear"></div>
 
-scene.add(tomatoObject);
-interactionManager.add(tomatoObject);
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero modi laudantium laborum, corporis, odit
+            architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut fuga tenetur
+            quidem dolor. architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut
+            fuga tenetur. architecto quam nesciunt, incidunt dolor autem corrupti maiores iure? Iure consectetur aut
+            fuga tenetur.6</p>
 
-blenderObject.addEventListener('click', (event) => {
-openPopup("Blender Object Clicked");
-});
+        <img src="/img/agra1.png" alt="Description of the image" width="1920" height="925">
+        <h3>Screen shot van AGRA</h3>
 
-scene.add(blenderObject);
-interactionManager.add(blenderObject);
+        <form class="form" method="dialog">
+            <button class="button" type="submit">Back</button>
+        </form>
+    </div>
+</body>
 
-insulinObject.addEventListener('click', (event) => {
-openPopup("Insulin Object Clicked");
-});
-
-scene.add(insulinObject);
-interactionManager.add(insulinObject);
+</html>

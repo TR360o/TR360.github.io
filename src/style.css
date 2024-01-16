@@ -40,18 +40,29 @@ h1 em {
 }
 
 .button {
-  border: 0;
+  background-color: black;
+  /* Green */
+  border: none;
+  color: #00c0fa;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
   cursor: pointer;
-  background: var(--gray-8);
-  color: white;
-  font-size: 80px;
-  font-weight: 700;
-  padding: var(--size-2) var(--size-4);
 }
 
-.button:hover,
-.button:focus {
-  background: var(--cyan-9);
+.button {
+  background-color: black;
+  color: #00c0fa;
+  border: 2px solid #00c0fa;
+}
+
+.button:hover {
+  background-color: #00c0fa;
+  color: white;
 }
 
 dialog {
@@ -61,82 +72,43 @@ dialog {
 
 }
 
-h1 {
-
-  color: white;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing);
-
-}
-
-h2 {
-  color: white;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing);
-}
-
-p {
-  color: white;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing);
-}
 
 form {
   display: grid;
   gap: 1em;
 }
 
-/* header {
-  background: var(--dark-bg);
-  grid-column: 2 / span 5;
-  font-size: 2.5rem;
-  padding: 2rem;
-  margin-bottom: var(--spacing);
-  opacity: 0;
+h1 {
+
+  color: white;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+
 }
 
-section {
-  grid-column: 2 / 8;
-  padding: 1rem;
-  background: var(--dark-bg);
-  font-size: 1.25rem;
-  line-height: 1.5;
-
-  margin-top: 650px;
-  margin-left: 80px;
-  max-width: 550px;
-
-} */
-
-
-
-.popup-content {
-  padding: 20px;
-}
-
-/* #leftBlock {
-  position: relative;
-  left: 60px;
-  /* Initial left position */
-
-
-/* #blok {
-
-
-  /* Initial left position */
-
-
-*/ .left {
-  grid-column: 6 / 12;
+h2 {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
 p {
   color: white;
-  /* cursor: default; */
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
+
+h3 {
+
+  color: white;
+  font-size: 0.7em;
+  margin-bottom: 25px;
+}
+
+
 
 #contact {
   grid-column: 2 / 8;
@@ -161,25 +133,50 @@ p {
   padding-top: 70px;
   margin: 0 auto;
   max-width: 1000px;
-  overflow-y: scroll;
-  background-color: blue;
+  padding-bottom: 70px;
+
+  /* overflow-x: hidden; */
 
 }
 
 /* .container::-webkit-scrollbar {
   display: none;
-} */
+}
 
-/* .container { */
-/* scrollbar-width: none; */
-/* Firefox */
+.container {
+  scrollbar-width: none;
+  /* Firefox */
 /* -ms-overflow-style: none; */
 /* IE and Edge */
-/* } */
 
-.H1Modal {
-  color: white;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing);
+
+img {
+  margin-bottom: 5px;
+  width: 100%;
+  height: auto;
+
+}
+
+video {
+  margin-bottom: 5px;
+  width: 100%;
+  height: auto;
+
+}
+
+.column {
+  float: left;
+  width: 45%;
+  padding: 25px;
+  margin: 0 auto;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.clear {
+  clear: both;
 }
