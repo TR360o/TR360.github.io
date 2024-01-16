@@ -79,37 +79,10 @@ loader.load(
 
 );
 
-
-
 const dLoader = new DRACOLoader();
 dLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 dLoader.setDecoderConfig({ type: 'js' });
 loader.setDRACOLoader(dLoader);
-
-
-
-
-// let whatsObject = null;
-// loader.load(
-//   "/assets/whats/scene.gltf",
-//   function (whats) {
-//     whatsObject = whats.scene;
-//     whats.scene.scale.set(1.7, 1.7, 1.7);
-//     whats.scene.position.set(-15, positionYContact, 0);
-//     scene.add(whats.scene);
-//     console.log(whats.scene)
-
-//   },
-//   function (xhr) {
-//     console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
-//   },
-//   function (error) {
-//     console.log("An error happened");
-//   }
-// );
-
-//envelope
-
 
 const fbxLoader = new FBXLoader()
 let envelopeObject = null;
@@ -661,6 +634,20 @@ tomatoObject.addEventListener('click', () => openPopup("tomatoObject"));
 scene.add(tomatoObject);
 interactionManager.add(tomatoObject);
 
+// blenderObject.addEventListener('click', () => openPopup("blenderObject"));
+// scene.add(blenderObject);
+// interactionManager.add(blenderObject);
+
+// insulinObject.addEventListener('click', () => openPopup("insulinObject"));
+// scene.add(insulinObject);
+// interactionManager.add(insulinObject);
+
+// fractalObject.addEventListener('click', () => openPopup("fractalObject"));
+// scene.add(fractalObject);
+// interactionManager.add(fractalObject);
+
+
+interactionManager.update();
 
 ///
 ///
@@ -704,7 +691,7 @@ loader.load(
 
     // Function to open LinkedIn.com
     function openLinkedIn() {
-      window.open('https://www.linkedin.com/in/thika-rudolph-0579a81b5/', '_blank');
+      window.open('https://www.linkedin.com', '_blank');
     }
   },
   function (xhr) {
@@ -818,32 +805,6 @@ loader.load(
 );
 
 
-// blenderObject.addEventListener('click', () => openPopup("Blender Object"));
-// scene.add(blenderObject);
-// interactionManager.add(blenderObject);
-
-// insulinObject.addEventListener('click', () => openPopup("Insulin Object"));
-// scene.add(insulinObject);
-// interactionManager.add(insulinObject);
-
-// fractalObject.addEventListener('click', () => {
-//   console.log("hallo");
-//   event.target.scale.set(1, 1, 1);
-//   openPopup("Fractal Object");
-// });
-// scene.add(fractalObject);
-// interactionManager.add(fractalObject);
-
-
-// function openGoogle() {
-//   window.open('https://www.google.com', '_blank');
-// }
-
-// gmailObject.addEventListener('click', openGoogle);
-
-// interactionManager.add(gmailObject);
-
-interactionManager.update();
 
 
 const clock = new THREE.Clock();
