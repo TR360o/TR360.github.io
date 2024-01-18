@@ -104,24 +104,24 @@ fbxLoader.load(
   }
 )
 
-let fractalObject = null;
-fbxLoader.load(
-  'assets/fractal/fractal10.fbx',
-  (fractal) => {
-    fractalObject = fractal;
-    fractal.scale.set(0.8, 0.8, 0.6)
-    // fractal.scale.set(.03, .03, .03);
-    fractal.rotateY(Math.PI / 8);
-    fractal.position.set(20, -93, 0);
+// let fractalObject = null;
+// fbxLoader.load(
+//   'assets/fractal/fractal10.fbx',
+//   (fractal) => {
+//     fractalObject = fractal;
+//     fractal.scale.set(0.8, 0.8, 0.6)
+//     // fractal.scale.set(.03, .03, .03);
+//     fractal.rotateY(Math.PI / 8);
+//     fractal.position.set(20, -93, 0);
 
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded fractal')
-  },
-  (error) => {
-    console.log(error)
-  }
-)
+//   },
+//   (xhr) => {
+//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded fractal')
+//   },
+//   (error) => {
+//     console.log(error)
+//   }
+// )
 
 //three model
 let threeObject = null;
