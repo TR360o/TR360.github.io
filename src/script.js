@@ -16,8 +16,6 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { InteractionManager } from 'three.interactive';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import gsap from 'gsap';
-
 
 // Scene & renderer
 const scene = new THREE.Scene();
@@ -693,154 +691,90 @@ function openPopup(objectName) {
 ///
 // contact buttons
 ///
+// Declare the variables outside the loader.load functions
 let linkObject = null;
-loader.load(
+let instaObject = null;
+let whatsObject = null;
+
+function loadObject(path, position, scale, clickHandler) {
+  loader.load(
+    path,
+    function (loadedObject) {
+      let object = loadedObject.scene;
+      object.scale.set(scale.x, scale.y, scale.z);
+      object.position.set(position.x, position.y, position.z);
+
+      scene.add(object);
+
+      // Register the object for raycasting
+      interactionManager.add(object);
+
+      // Update the interaction manager
+      interactionManager.update();
+
+      // Add a click event listener
+      document.addEventListener('click', function (event) {
+        handleObjectClick(object, clickHandler, event);
+      });
+    },
+    function (xhr) {
+      // console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
+    },
+    function (error) {
+      // console.log("An error happened");
+    }
+  );
+}
+
+// Load LinkedIn object
+loadObject(
   'linkedIn/link33.glb',
-  function (link) {
-    linkObject = link.scene;
-    link.scene.scale.set(1.5, 1.5, .75);
-    link.scene.position.set(-40, positionYContact, 0);
-
-    scene.add(link.scene);
-
-    // Register the object for raycasting
-    interactionManager.add(linkObject);
-
-    // Update the interaction manager
-    interactionManager.update();
-
-    // Add a click event listener
-    document.addEventListener('click', onClickLink);
-
-    // Function to handle click events for the link object
-    function onClickLink(event) {
-      // Update the raycaster with the current mouse position
-      let mouse = new THREE.Vector2();
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      // Check for intersections
-      raycaster.setFromCamera(mouse, camera); // Assuming 'camera' is your Three.js camera
-      let intersects = raycaster.intersectObjects([linkObject]);
-
-      // If there is an intersection, open LinkedIn.com
-      if (intersects.length > 0) {
-        openLinkedIn();
-      }
-    }
-
-    // Function to open LinkedIn.com
-    function openLinkedIn() {
-      window.open('https://www.linkedin.com', '_blank');
-    }
-  },
-  function (xhr) {
-    // console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
-  },
-  function (error) {
-    // console.log("An error happened");
-  }
+  { x: -40, y: positionYContact, z: 0 },
+  { x: 1.5, y: 1.5, z: 0.75 },
+  openLinkedIn
 );
 
 // Load Instagram object
-let instaObject = null;
-loader.load(
+loadObject(
   'instagram/insta2.glb',
-  function (insta) {
-    instaObject = insta.scene;
-    insta.scene.scale.set(1.5, 1.5, .75);
-    insta.scene.position.set(-22, positionYContact, 0);
-
-    scene.add(insta.scene);
-
-    // Register the object for raycasting
-    interactionManager.add(instaObject);
-
-    // Update the interaction manager
-    interactionManager.update();
-
-    // Add a click event listener
-    document.addEventListener('click', onClickInsta);
-
-    // Function to handle click events for the Instagram object
-    function onClickInsta(event) {
-      // Update the raycaster with the current mouse position
-      let mouse = new THREE.Vector2();
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      // Check for intersections
-      raycaster.setFromCamera(mouse, camera); // Assuming 'camera' is your Three.js camera
-      let intersects = raycaster.intersectObjects([instaObject]);
-
-      // If there is an intersection, open Instagram.com
-      if (intersects.length > 0) {
-        openInstagram();
-      }
-    }
-
-    // Function to open Instagram.com
-    function openInstagram() {
-      window.open('https://www.instagram.com/thika_rudolph?igsh=NmV2c2pqdHI4Ym53', '_blank');
-    }
-  },
-  function (xhr) {
-    // console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
-  },
-  function (error) {
-    // console.log("An error happened");
-  }
+  { x: -22, y: positionYContact, z: 0 },
+  { x: 1.5, y: 1.5, z: 0.75 },
+  openInstagram
 );
 
+// Load WhatsApp object
+loadObject(
+  'whats/whatsapp.glb',
+  { x: -17, y: -152, z: 0 },
+  { x: 1.5, y: 1.5, z: 1 },
+  openPhoneNumber
+);
 
-let isHovered = false;
-let whatsObject = null;
-let originalYPosition = 0; // Placeholder for the original Y position
-
-// Function to handle hover effect (make it bigger)
-function onHover() {
-  if (!isHovered) {
-    isHovered = true;
-    gsap.to(whatsObject.position, { duration: 0.3, y: "+=0.7", ease: 'power2.out' });
-  }
-}
-
-// Function to handle hover out effect (return to normal size)
-function onHoverOut() {
-  if (isHovered) {
-    isHovered = false;
-    gsap.to(whatsObject.position, {
-      duration: 0.3,
-      y: originalYPosition, // Return to the original Y position
-      ease: 'power2.out',
-    });
-  }
-}
-
-// Function to handle mouse move events
-function handleMouseMove(event) {
-  // Update the mouse position
+// Function to handle click events for objects
+function handleObjectClick(object, action, event) {
+  // Update the raycaster with the current mouse position
+  let mouse = new THREE.Vector2();
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   // Check for intersections
-  raycaster.setFromCamera(mouse, camera);
-  let intersects = raycaster.intersectObjects([whatsObject]);
+  raycaster.setFromCamera(mouse, camera); // Assuming 'camera' is your Three.js camera
+  let intersects = raycaster.intersectObjects([object]);
 
-  // Handle hover effects
+  // If there is an intersection, perform the specified action
   if (intersects.length > 0) {
-    onHover();
-  } else {
-    onHoverOut();
+    action();
   }
 }
 
-// Add the mouse move event listener
-document.addEventListener('mousemove', handleMouseMove);
+// Function to open LinkedIn.com
+function openLinkedIn() {
+  window.open('https://www.linkedin.com', '_blank');
+}
 
-// Function to handle click events for the WhatsApp object
-function onClickWhats() {
-  openPhoneNumber();
+// Function to open Instagram.com
+function openInstagram() {
+  window.open('https://www.instagram.com/thika_rudolph?igsh=NmV2c2pqdHI4Ym53', '_blank');
 }
 
 // Function to open the callable telephone link
@@ -848,33 +782,6 @@ function openPhoneNumber() {
   // Replace '0613021018' with your actual phone number
   window.open('https://wa.me/31613021018?text=Hi%20there!%20Feel%20free%20to%20message%20me%20any%20time%20if%20you%20have%20any%20questions!', '_blank');
 }
-
-loader.load(
-  "whats/whatsapp.glb",
-  function (whats) {
-    try {
-      whatsObject = whats.scene;
-      whatsObject.scale.set(1.5, 1.5, 1);
-      whatsObject.position.set(-17, -152, 0);
-      originalYPosition = whatsObject.position.y; // Store the original Y position
-
-      scene.add(whatsObject);
-
-      // Add click event listener
-      document.addEventListener('click', onClickWhats);
-    } catch (error) {
-      console.error('Error during model setup:', error);
-    }
-  },
-  function (xhr) {
-    if (xhr.loaded === xhr.total) {
-      console.log('Model is 100% loaded');
-    }
-  },
-  function (error) {
-    console.error('An error occurred during loading:', error);
-  }
-);
 
 
 
@@ -910,6 +817,8 @@ const tick = () => {
 
   const speedMultiplierp = 2;
   const amplitudep = 0.005;
+
+
 
 }
 tick();
