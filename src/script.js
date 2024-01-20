@@ -16,6 +16,8 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { InteractionManager } from 'three.interactive';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import gsap from 'gsap';
+
 
 // Scene & renderer
 const scene = new THREE.Scene();
@@ -687,35 +689,6 @@ function openPopup(objectName) {
   xhr.send();
   // console.log(objectName)
 }
-
-
-// Add event listeners for each object
-// envelopeObject.addEventListener('click', () => openPopup("envelopeObject"));
-// scene.add(envelopeObject);
-// interactionManager.add(envelopeObject);
-
-// threeObject.addEventListener('click', () => openPopup("threeObject"));
-// scene.add(threeObject);
-// interactionManager.add(threeObject);
-
-
-
-
-// blenderObject.addEventListener('click', () => openPopup("blenderObject"));
-// scene.add(blenderObject);
-// interactionManager.add(blenderObject);
-
-// insulinObject.addEventListener('click', () => openPopup("insulinObject"));
-// scene.add(insulinObject);
-// interactionManager.add(insulinObject);
-
-// fractalObject.addEventListener('click', () => openPopup("fractalObject"));
-// scene.add(fractalObject);
-// interactionManager.add(fractalObject);
-
-
-interactionManager.update();
-
 ///
 ///
 // contact buttons
@@ -819,58 +792,89 @@ loader.load(
   }
 );
 
-// Load WhatsApp object
-// Load WhatsApp object
+
+let isHovered = false;
 let whatsObject = null;
+let originalYPosition = 0; // Placeholder for the original Y position
+
+// Function to handle hover effect (make it bigger)
+function onHover() {
+  if (!isHovered) {
+    isHovered = true;
+    gsap.to(whatsObject.position, { duration: 0.3, y: "+=0.7", ease: 'power2.out' });
+  }
+}
+
+// Function to handle hover out effect (return to normal size)
+function onHoverOut() {
+  if (isHovered) {
+    isHovered = false;
+    gsap.to(whatsObject.position, {
+      duration: 0.3,
+      y: originalYPosition, // Return to the original Y position
+      ease: 'power2.out',
+    });
+  }
+}
+
+// Function to handle mouse move events
+function handleMouseMove(event) {
+  // Update the mouse position
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Check for intersections
+  raycaster.setFromCamera(mouse, camera);
+  let intersects = raycaster.intersectObjects([whatsObject]);
+
+  // Handle hover effects
+  if (intersects.length > 0) {
+    onHover();
+  } else {
+    onHoverOut();
+  }
+}
+
+// Add the mouse move event listener
+document.addEventListener('mousemove', handleMouseMove);
+
+// Function to handle click events for the WhatsApp object
+function onClickWhats() {
+  openPhoneNumber();
+}
+
+// Function to open the callable telephone link
+function openPhoneNumber() {
+  // Replace '0613021018' with your actual phone number
+  window.open('https://wa.me/31613021018?text=Hi%20there!%20Feel%20free%20to%20message%20me%20any%20time%20if%20you%20have%20any%20questions!', '_blank');
+}
+
 loader.load(
   "whats/whatsapp.glb",
   function (whats) {
-    whatsObject = whats.scene;
-    whats.scene.scale.set(1.5, 1.5, 1);
-    whats.scene.position.set(-17, -152, 0);
+    try {
+      whatsObject = whats.scene;
+      whatsObject.scale.set(1.5, 1.5, 1);
+      whatsObject.position.set(-17, -152, 0);
+      originalYPosition = whatsObject.position.y; // Store the original Y position
 
-    scene.add(whats.scene);
+      scene.add(whatsObject);
 
-    // Register the object for raycasting
-    interactionManager.add(whatsObject);
-
-    // Update the interaction manager
-    interactionManager.update();
-
-    // Add a click event listener
-    document.addEventListener('click', onClickWhats);
-
-    // Function to handle click events for the WhatsApp object
-    function onClickWhats(event) {
-      // Update the raycaster with the current mouse position
-      let mouse = new THREE.Vector2();
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      // Check for intersections
-      raycaster.setFromCamera(mouse, camera); // Assuming 'camera' is your Three.js camera
-      let intersects = raycaster.intersectObjects([whatsObject]);
-
-      // If there is an intersection, open the callable telephone link
-      if (intersects.length > 0) {
-        openPhoneNumber();
-      }
-    }
-
-    // Function to open the callable telephone link
-    function openPhoneNumber() {
-      // Replace '0613021018' with your actual phone number
-      window.open('https://wa.me/31613021018?text=Hi%20there!%20Feel%20free%20to%20message%20me%20any%20time%20if%20you%20have%20any%20questions!', '_blank');
+      // Add click event listener
+      document.addEventListener('click', onClickWhats);
+    } catch (error) {
+      console.error('Error during model setup:', error);
     }
   },
   function (xhr) {
-    // console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
+    if (xhr.loaded === xhr.total) {
+      console.log('Model is 100% loaded');
+    }
   },
   function (error) {
-    // console.log("An error happened");
+    console.error('An error occurred during loading:', error);
   }
 );
-
 
 
 
