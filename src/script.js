@@ -502,7 +502,9 @@ textGroup.add(triangle);
 //Group 2 About me
 
 const fontLoader2 = new FontLoader();
+
 fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
+
   const textGeometryH1 = new TextGeometry("About Me", {
     font: font,
     size: 3,
@@ -522,6 +524,7 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
   });
 
   const textH1 = new THREE.Mesh(textGeometryH1, textMaterial);
+
   textH1.position.y = -35;
   textH1.position.x = positionX;
 
@@ -817,6 +820,10 @@ const tick = () => {
 
   const speedMultiplierp = 2;
   const amplitudep = 0.005;
+
+  // cube.position.y = Math.sin(elapsedTime) * 2 + -47;
+  const floatingAmplitude = 1;
+  cube.position.y = Math.sin(elapsedTime * 0.5) * floatingAmplitude - 47;
 
 
 
