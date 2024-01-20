@@ -68,16 +68,40 @@ const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 
 
-//test//
-loader.load(
-  'test4.glb',
-  (gltf) => {
-    console.log(gltf)
-    gltf.scene.scale.set(2, 2, 2);
-    scene.add(gltf.scene);
-  }
-)
+//
+// loader.load(
+//   'envelope/brief.glb',
+//   (gltf) => {
+//     console.log(gltf)
+//     gltf.scene.scale.set(2, 2, 2);
+//     scene.add(gltf.scene);
+//   }
+// )
 
+let tomatoObject = null;
+
+loader.load(
+  'tomato/tomato.glb',
+  (tomato) => {
+    tomatoObject = tomato.scene;
+    tomato.scene.scale.set(100, 100, 100);
+    tomato.scene.rotateX(Math.PI / 3); // Adjust the angle as needed
+    tomato.scene.position.set(positionXColumn1, positionYrow1 + 1, 0);
+    scene.add(tomato.scene);
+
+    // Add event listener only if tomatoObject is not null
+    if (tomatoObject) {
+      tomatoObject.addEventListener('click', () => openPopup("tomatoObject"));
+      interactionManager.add(tomatoObject);
+    }
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded tom');
+  },
+  (error) => {
+    console.log(error);
+  }
+);
 
 
 
@@ -105,23 +129,32 @@ loader.load(
 
 const fbxLoader = new FBXLoader()
 let envelopeObject = null;
-fbxLoader.load(
-  'assets/envelope/letter5.fbx',
+
+loader.load(
+  'envelope/brief.glb',
   (envelope) => {
-    envelopeObject = envelope;
-    // object.scale.set(.01, .01, .01)
-    envelope.scale.set(.03, .03, .03);
-    envelope.rotateY(Math.PI / -2);
-    envelope.position.set(positionXColumn1, positionYrow2, 0);
+    envelopeObject = envelope.scene;
+    envelope.scene.scale.set(3, 3, 3);
+    envelope.scene.rotateY(Math.PI / -2);
+    envelope.scene.position.set(positionXColumn1, positionYrow2, 0);
+
+    scene.add(envelopeObject);
+
+    // Add event listener and interaction manager only if envelopeObject is not null
+    if (envelopeObject) {
+      envelopeObject.addEventListener('click', () => openPopup("envelopeObject"));
+      interactionManager.add(envelopeObject);
+    }
 
   },
   (xhr) => {
-    // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded brief');
   },
   (error) => {
-    // console.log(error)
+    console.log(error);
   }
-)
+);
+
 
 // let fractalObject = null;
 // fbxLoader.load(
@@ -144,23 +177,32 @@ fbxLoader.load(
 
 //three model
 let threeObject = null;
-fbxLoader.load(
-  'assets/three/three.fbx',
+
+loader.load(
+  'three/threeJs.glb',
   (three) => {
-    threeObject = three;
-    // object.scale.set(.01, .01, .01)
-    three.scale.set(.001, .001, .001);
-    three.rotateY(Math.PI / -2015);
-    three.position.set(positionXColumn2 - 1, positionYrow2, 0);
+    threeObject = three.scene;
+    three.scene.scale.set(0.1, 0.1, 0.1);
+    three.scene.rotateY(Math.PI / -2015);
+    three.scene.position.set(positionXColumn2 - 1, positionYrow2, 0);
+
+    scene.add(threeObject);
+
+    // Add event listener and interaction manager only if threeObject is not null
+    if (threeObject) {
+      threeObject.addEventListener('click', () => openPopup("threeObject"));
+      interactionManager.add(threeObject);
+    }
 
   },
   (xhr) => {
-    // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded tree');
   },
   (error) => {
-    // console.log(error)
+    console.log(error);
   }
-)
+);
+
 
 //pen
 let insulinObject = null;
@@ -186,24 +228,6 @@ fbxLoader.load(
 
 //tomato
 
-let tomatoObject = null;
-fbxLoader.load(
-  'assets/tomato/tomato1.fbx',
-  (tomato) => {
-    tomatoObject = tomato;
-    // object.scale.set(.01, .01, .01)
-    tomato.rotateX(Math.PI / 5); // Adjust the angle as needed
-    tomato.position.set(positionXColumn1, positionYrow1 + 1, 0);
-    // console.log(tomatoObject)
-
-  },
-  (xhr) => {
-    // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-  },
-  (error) => {
-    // console.log(error)
-  }
-)
 
 
 
@@ -306,10 +330,10 @@ const [texture, obj] = await Promise.all([
 /////////////////////
 /////////////////////
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 1.4)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 scene.add(ambientLight)
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
 directionalLight.castShadow = true
 directionalLight.shadow.mapSize.set(1024, 1024)
 directionalLight.shadow.camera.far = 15
@@ -641,17 +665,16 @@ function openPopup(objectName) {
 
 
 // Add event listeners for each object
-envelopeObject.addEventListener('click', () => openPopup("envelopeObject"));
-scene.add(envelopeObject);
-interactionManager.add(envelopeObject);
+// envelopeObject.addEventListener('click', () => openPopup("envelopeObject"));
+// scene.add(envelopeObject);
+// interactionManager.add(envelopeObject);
 
-threeObject.addEventListener('click', () => openPopup("threeObject"));
-scene.add(threeObject);
-interactionManager.add(threeObject);
+// threeObject.addEventListener('click', () => openPopup("threeObject"));
+// scene.add(threeObject);
+// interactionManager.add(threeObject);
 
-tomatoObject.addEventListener('click', () => openPopup("tomatoObject"));
-scene.add(tomatoObject);
-interactionManager.add(tomatoObject);
+
+
 
 // blenderObject.addEventListener('click', () => openPopup("blenderObject"));
 // scene.add(blenderObject);
