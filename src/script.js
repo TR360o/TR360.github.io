@@ -91,7 +91,7 @@ loader.load(
     tomatoObject = tomato.scene;
     tomato.scene.scale.set(100, 100, 100);
     tomato.scene.rotateX(Math.PI / 3); // Adjust the angle as needed
-    tomato.scene.position.set(positionXColumn1, positionYrow1 + 1, 0);
+    tomato.scene.position.set(positionXColumn1, positionYrow1 + 2, 0);
     scene.add(tomato.scene);
 
     // Add event listener only if tomatoObject is not null
@@ -112,22 +112,29 @@ loader.load(
 
 //Blender
 let blenderObject = null;
+
 loader.load(
-  "/assets/blender/scene.gltf",
+  'blender/blenderCom.glb',
   function (blender) {
     blenderObject = blender.scene;
     blender.scene.scale.set(0.01, 0.01, 0.01);
     blender.scene.position.set(positionXColumn2, positionYrow1, 0);
-    // console.log(blender.scene)
+
+    scene.add(blenderObject);
+
+    // Add event listener and interaction manager only if blenderObject is not null
+    if (blenderObject) {
+      blenderObject.addEventListener('click', () => openPopup("blenderObject"));
+      interactionManager.add(blenderObject);
+    }
 
   },
   function (xhr) {
-    // console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
   },
   function (error) {
-    // console.log("An error happened");
+    console.log("An error happened");
   }
-
 );
 
 
@@ -160,25 +167,33 @@ loader.load(
   }
 );
 
+let fractalObject = null;
 
-// let fractalObject = null;
-// fbxLoader.load(
-//   'assets/fractal/fractal10.fbx',
-//   (fractal) => {
-//     fractalObject = fractal;
-//     fractal.scale.set(0.8, 0.8, 0.6)
-//     // fractal.scale.set(.03, .03, .03);
-//     fractal.rotateY(Math.PI / 8);
-//     fractal.position.set(20, -93, 0);
+loader.load(
+  'fractal/fractal23.glb',
+  (fractal) => {
+    fractalObject = fractal.scene;
+    fractal.scene.scale.set(80, 80, 60);
+    fractal.scene.rotateY(Math.PI / 8);
+    fractal.scene.position.set(20, -93, 0);
 
-//   },
-//   (xhr) => {
-//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded fractal')
-//   },
-//   (error) => {
-//     console.log(error)
-//   }
-// )
+    scene.add(fractalObject);
+
+    // Add event listener and interaction manager only if fractalObject is not null
+    if (fractalObject) {
+      fractalObject.addEventListener('click', () => openPopup("fractalObject"));
+      interactionManager.add(fractalObject);
+    }
+
+  },
+  (xhr) => {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded fractal');
+  },
+  (error) => {
+    console.log(error);
+  }
+);
+
 
 //three model
 let threeObject = null;
@@ -646,7 +661,7 @@ moveCamera();
 
 
 ///
-///Works Models click C:\Users\trudo\Documents\codeBackUp\TR360o.github.io\TR360o.github.io\src\tomatoObject.html
+
 // 
 function openPopup(objectName) {
   const modal = document.querySelector("#modal");
