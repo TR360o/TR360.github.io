@@ -56,7 +56,29 @@ var borderX = 0.02;
 //   */
 //fractal
 
+
+
+
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('/draco/');
+console.log(dracoLoader)
+
+
 const loader = new GLTFLoader();
+loader.setDRACOLoader(dracoLoader);
+
+
+//test//
+loader.load(
+  'test4.glb',
+  (gltf) => {
+    console.log(gltf)
+    gltf.scene.scale.set(2, 2, 2);
+    scene.add(gltf.scene);
+  }
+)
+
+
 
 
 //Blender
@@ -67,22 +89,19 @@ loader.load(
     blenderObject = blender.scene;
     blender.scene.scale.set(0.01, 0.01, 0.01);
     blender.scene.position.set(positionXColumn2, positionYrow1, 0);
-    console.log(blender.scene)
+    // console.log(blender.scene)
 
   },
   function (xhr) {
-    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+    // console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
   },
   function (error) {
-    console.log("An error happened");
+    // console.log("An error happened");
   }
 
 );
 
-const dLoader = new DRACOLoader();
-dLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
-dLoader.setDecoderConfig({ type: 'js' });
-loader.setDRACOLoader(dLoader);
+
 
 const fbxLoader = new FBXLoader()
 let envelopeObject = null;
@@ -97,10 +116,10 @@ fbxLoader.load(
 
   },
   (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
   },
   (error) => {
-    console.log(error)
+    // console.log(error)
   }
 )
 
@@ -136,10 +155,10 @@ fbxLoader.load(
 
   },
   (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
   },
   (error) => {
-    console.log(error)
+    // console.log(error)
   }
 )
 
@@ -156,10 +175,10 @@ fbxLoader.load(
 
   },
   (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
   },
   (error) => {
-    console.log(error)
+    // console.log(error)
   }
 )
 
@@ -175,14 +194,14 @@ fbxLoader.load(
     // object.scale.set(.01, .01, .01)
     tomato.rotateX(Math.PI / 5); // Adjust the angle as needed
     tomato.position.set(positionXColumn1, positionYrow1 + 1, 0);
-    console.log(tomatoObject)
+    // console.log(tomatoObject)
 
   },
   (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
   },
   (error) => {
-    console.log(error)
+    // console.log(error)
   }
 )
 
@@ -243,10 +262,10 @@ function loadBorderObject(filePath, position, rotation) {
       scene.add(object);
     },
     (xhr) => {
-      console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+      // console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
     },
     (error) => {
-      console.log(error);
+      // console.log(error);
     }
   );
 }
@@ -617,7 +636,7 @@ function openPopup(objectName) {
     }
   };
   xhr.send();
-  console.log(objectName)
+  // console.log(objectName)
 }
 
 
@@ -695,10 +714,10 @@ loader.load(
     }
   },
   function (xhr) {
-    console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
+    // console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
   },
   function (error) {
-    console.log("An error happened");
+    // console.log("An error happened");
   }
 );
 
@@ -745,10 +764,10 @@ loader.load(
     }
   },
   function (xhr) {
-    console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
+    // console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
   },
   function (error) {
-    console.log("An error happened");
+    // console.log("An error happened");
   }
 );
 
@@ -797,10 +816,10 @@ loader.load(
     }
   },
   function (xhr) {
-    console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
+    // console.log((xhr.loaded / xhr.total) * 100 + "% loaded link");
   },
   function (error) {
-    console.log("An error happened");
+    // console.log("An error happened");
   }
 );
 
