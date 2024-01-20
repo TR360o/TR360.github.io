@@ -31,6 +31,11 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
+const interactionManager = new InteractionManager(
+  renderer,
+  camera,
+  renderer.domElement
+);
 // Canvas
 
 //Variables
@@ -206,23 +211,32 @@ loader.load(
 
 //pen
 let insulinObject = null;
-fbxLoader.load(
-  'assets/insulin/pen1.fbx',
+
+loader.load(
+  'insulin/insulinpen.glb',
   (insulin) => {
-    insulinObject = insulin;
-    insulin.scale.set(.004, .004, .004)
-    insulin.rotateZ(Math.PI / -4);
-    insulin.rotateX(Math.PI / 2);
-    insulin.position.set(positionXColumn3 - 1, positionYrow2, 0);
+    insulinObject = insulin.scene;
+    insulin.scene.scale.set(0.35, 0.35, 0.35);
+    insulin.scene.rotateZ(Math.PI / -4);
+    insulin.scene.rotateX(Math.PI / 2);
+    insulin.scene.position.set(positionXColumn3 - 1, positionYrow2, 0);
+
+    scene.add(insulinObject);
+
+    // Add event listener and interaction manager only if insulinObject is not null
+    if (insulinObject) {
+      insulinObject.addEventListener('click', () => openPopup("insulinObject"));
+      interactionManager.add(insulinObject);
+    }
 
   },
   (xhr) => {
-    // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded  pen');
   },
   (error) => {
-    // console.log(error)
+    console.log(error);
   }
-)
+);
 
 
 
@@ -629,11 +643,7 @@ document.body.onscroll = moveCamera;
 moveCamera();
 
 
-const interactionManager = new InteractionManager(
-  renderer,
-  camera,
-  renderer.domElement
-);
+
 
 ///
 ///Works Models click C:\Users\trudo\Documents\codeBackUp\TR360o.github.io\TR360o.github.io\src\tomatoObject.html
@@ -697,11 +707,11 @@ interactionManager.update();
 ///
 let linkObject = null;
 loader.load(
-  "/assets/link/scene.gltf",
+  'linkedIn/link33.glb',
   function (link) {
     linkObject = link.scene;
-    link.scene.scale.set(1.7, 1.7, 1.7);
-    link.scene.position.set(-20, positionYContact, 0);
+    link.scene.scale.set(1.5, 1.5, .75);
+    link.scene.position.set(-40, positionYContact, 0);
 
     scene.add(link.scene);
 
@@ -747,11 +757,11 @@ loader.load(
 // Load Instagram object
 let instaObject = null;
 loader.load(
-  "/assets/instag/insta.gltf",
+  'instagram/insta2.glb',
   function (insta) {
     instaObject = insta.scene;
-    insta.scene.scale.set(1.7, 1.7, 1.7);
-    insta.scene.position.set(-10, positionYContact, 0);
+    insta.scene.scale.set(1.5, 1.5, .75);
+    insta.scene.position.set(-22, positionYContact, 0);
 
     scene.add(insta.scene);
 
@@ -798,11 +808,11 @@ loader.load(
 // Load WhatsApp object
 let whatsObject = null;
 loader.load(
-  "/assets/whats/scene.gltf",
+  "whats/whatsapp.glb",
   function (whats) {
     whatsObject = whats.scene;
-    whats.scene.scale.set(1.7, 1.7, 1.7);
-    whats.scene.position.set(-15, positionYContact, 0);
+    whats.scene.scale.set(1.5, 1.5, 1);
+    whats.scene.position.set(-17, -152, 0);
 
     scene.add(whats.scene);
 
