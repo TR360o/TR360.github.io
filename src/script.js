@@ -666,38 +666,37 @@ moveCamera();
 ///
 
 // 
+const xhr = new XMLHttpRequest();
+
 function openPopup(objectName) {
   const modal = document.querySelector("#modal");
-  const modalTitle = document.querySelector("#modal-title");
   const modalContent = document.querySelector("#modal-content");
 
   // Make an AJAX request to fetch the specific object's content
-  const xhr = new XMLHttpRequest();
   xhr.open("GET", "/" + objectName.toLowerCase() + ".html", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       const response = xhr.responseText;
 
-      // Set modal title
-
-
       // Set modal content
       modalContent.innerHTML = response;
 
+      // Add modal-open class to body when modal is shown
+      document.body.classList.add('modal-open');
+
+      // Show modal
       modal.showModal();
     }
   };
   xhr.send();
-  // console.log(objectName)
 }
-///
-///
-// contact buttons
-///
-// Declare the variables outside the loader.load functions
-let linkObject = null;
-let instaObject = null;
-let whatsObject = null;
+
+// Add an event listener to close the modal and remove modal-open class
+modal.addEventListener('close', function () {
+  // Remove modal-open class from body when modal is closed
+  document.body.classList.remove('modal-open');
+});
+
 
 function loadObject(path, position, scale, clickHandler) {
   loader.load(
