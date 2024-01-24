@@ -600,8 +600,10 @@ textGroup.position.z = 0;
 textGroup.position.x = 0;
 scene.add(textGroup3);
 
+let textH1; // Declare textH1 in an accessible scope
+
 const fontLoader = new FontLoader();
-fontLoader.load("/fonts/Varela_Round_Regular.json", (font) => {
+fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
   const textGeometryH1 = new TextGeometry("Welcome t    my space", {
     font: font,
     size: 5,
@@ -620,9 +622,15 @@ fontLoader.load("/fonts/Varela_Round_Regular.json", (font) => {
     matcap: matcapTexture1,
   });
 
-  const textH1 = new THREE.Mesh(textGeometryH1, textMaterial);
+  textH1 = new THREE.Mesh(textGeometryH1, textMaterial);
   textGroup.add(textH1);
+});
 
+// The following code assumes you want to use textH1 outside the callback.
+// If you have additional logic or rendering, make sure it's placed accordingly.
+
+const fontLoader5 = new FontLoader();
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
   const textGeometryH2 = new TextGeometry("I'm Thika, a Multimedia Design student", {
     font: font,
     size: 2,
@@ -646,6 +654,9 @@ fontLoader.load("/fonts/Varela_Round_Regular.json", (font) => {
 
   textGroup.add(textH2);
 });
+
+// Additional code or rendering logic can be placed here
+
 
 /**
  * Object
@@ -679,7 +690,7 @@ const textMaterialH1 = new THREE.MeshMatcapMaterial({
   matcap: matcapTexture1,
 });
 const torus = new THREE.Mesh(geometry, textMaterialH1);
-torus.position.x = 1;
+torus.position.x = 1.75;
 textGroup.add(torus);
 
 const triangleGemetery = new THREE.TorusGeometry(2, 1, 14, 3);
@@ -695,7 +706,7 @@ textGroup.add(triangle);
 
 const fontLoader2 = new FontLoader();
 
-fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
 
   const textGeometryH1 = new TextGeometry("About Me", {
     font: font,
@@ -728,7 +739,7 @@ fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
 // Group3 works
 
 const fontLoader3 = new FontLoader();
-fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
   const textGeometryH3 = new TextGeometry("Works", {
     font: font,
     size: 3,
@@ -764,7 +775,7 @@ textGroup2.add(cube);
 cube.position.y = -47;
 
 
-fontLoader2.load("/fonts/Varela_Round_Regular.json", (font) => {
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
   const textGeometryH3 = new TextGeometry("contact", {
     font: font,
     size: 2.5,
