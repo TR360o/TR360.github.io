@@ -494,19 +494,7 @@ function loadBorderObject(filePath, position, rotation) {
   );
 }
 
-const borderObjects = [
-  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(-20, -93, 0), rotation: Math.PI / 2 },
-  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(0, -93, 0), rotation: Math.PI / 2 },
-  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(20, positionYrow2, 0), rotation: Math.PI / 2 },
-  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(positionXColumn2, positionYrow2, 0), rotation: Math.PI / 2 },
-  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(positionXColumn1, positionYrow2, 0), rotation: Math.PI / 2 },
-  { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(20, -93, 0), rotation: Math.PI / 2 },
-  // Add more border objects as needed
-];
 
-borderObjects.forEach((border) => {
-  loadBorderObject(border.filePath, border.position, border.rotation);
-});
 
 
 const objTextureLoader = new THREE.TextureLoader();
