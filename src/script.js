@@ -501,7 +501,7 @@ const objTextureLoader = new THREE.TextureLoader();
 const objLoader = new OBJLoader();
 
 const [texture, obj] = await Promise.all([
-  objTextureLoader.loadAsync('assets/linked/linked.png'),
+  objTextureLoader.loadAsync('linked/linked.png'),
   objLoader.loadAsync(''),
 
 
