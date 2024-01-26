@@ -894,6 +894,24 @@ function openPopup(objectName) {
   xhr.send();
 }
 
+function handleObjectClick(object, clickHandler, event) {
+  // Calculate normalized mouse coordinates (-1 to +1)
+  let mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Update the raycaster
+  raycaster.setFromCamera(mouse, camera);
+
+  // Check for intersections
+  let intersects = raycaster.intersectObject(object);
+
+  // Trigger the click handler if an intersection is found
+  if (intersects.length > 0) {
+    clickHandler(); // Call the specified click handler function
+  }
+}
+
 // Add an event listener to close the modal and remove modal-open class
 modal.addEventListener('close', function () {
   // Remove modal-open class from body when modal is closed
