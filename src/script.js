@@ -723,7 +723,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
 
 });
 
-const thikaTexture = new THREE.TextureLoader().load("/assets/thikaCube.png");
+const thikaTexture = new THREE.TextureLoader().load("/thika/thikaCube.png");
 var cgeometry = new THREE.BoxGeometry(15, 15, 0.8);
 var material = new THREE.MeshBasicMaterial({ map: thikaTexture });
 var cube = new THREE.Mesh(cgeometry, material);
@@ -824,7 +824,7 @@ function openPopup(objectName) {
   const modalContent = document.querySelector("#modal-content");
 
 
-  xhr.open("GET", "/modals" + objectName.toLowerCase() + ".html", true);
+  xhr.open("GET", "/modals/" + objectName.toLowerCase() + ".html", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       const response = xhr.responseText;
