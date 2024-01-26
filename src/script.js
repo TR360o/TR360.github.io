@@ -836,7 +836,7 @@ function openPopup(objectName) {
   const modalContent = document.querySelector("#modal-content");
 
 
-  xhr.open("GET", "/" + objectName.toLowerCase() + ".html", true);
+  xhr.open("GET", "/modals" + objectName.toLowerCase() + ".html", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       const response = xhr.responseText;
