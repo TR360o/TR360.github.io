@@ -17,7 +17,7 @@ import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { InteractionManager } from 'three.interactive';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { gsap } from 'gsap';
-import * as TWEEN from '@tweenjs/tween.js'
+
 
 // Scene & renderer
 const scene = new THREE.Scene();
@@ -28,7 +28,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-// renderer.setClearColor(0xffffff); // white
+
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
@@ -38,7 +38,7 @@ const interactionManager = new InteractionManager(
   camera,
   renderer.domElement
 );
-// Canvas
+
 
 //Variables
 var positionX = -35;
@@ -59,13 +59,6 @@ var positionYContact = -160;
 var borderX = 0.02;
 
 
-// /* 3D models
-//   */
-//fractal
-
-
-
-
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('/draco/');
 console.log(dracoLoader)
@@ -74,16 +67,6 @@ console.log(dracoLoader)
 const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 
-
-//
-// loader.load(
-//   'envelope/brief.glb',
-//   (gltf) => {
-//     console.log(gltf)
-//     gltf.scene.scale.set(2, 2, 2);
-//     scene.add(gltf.scene);
-//   }
-// )
 let tomatoObject = null;
 let isHovered = false;
 
@@ -92,15 +75,13 @@ loader.load(
   (tomato) => {
     tomatoObject = tomato.scene;
     tomato.scene.scale.set(100, 100, 100);
-    tomato.scene.rotateX(Math.PI / 3); // Adjust the angle as needed
+    tomato.scene.rotateX(Math.PI / 3);
     tomato.scene.position.set(positionXColumn1, positionYrow1 + 2, 0);
     scene.add(tomato.scene);
 
-    // Add event listener only if tomatoObject is not null
     if (tomatoObject) {
       tomatoObject.addEventListener('click', () => openPopup("tomatoObject"));
 
-      // Add event listener for mouse move
       document.addEventListener('mousemove', handleMouseMove);
 
       interactionManager.add(tomatoObject);
@@ -115,26 +96,26 @@ loader.load(
 );
 
 function handleMouseMove(event) {
-  // Calculate normalized mouse coordinates (-1 to +1)
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster
+
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
+
   let intersects = raycaster.intersectObject(tomatoObject);
 
-  // Move the tomatoObject up on hover
+
   if (intersects.length > 0) {
     if (!isHovered) {
-      // Move the tomatoObject up by 1 unit smoothly
+
       gsap.to(tomatoObject.position, { y: '+=1', duration: 0.2 });
       isHovered = true;
     }
   } else {
     if (isHovered) {
-      // Move the tomatoObject down by 1 unit smoothly after a delay of 0.5 seconds
+
       gsap.to(tomatoObject.position, { y: '-=1', duration: 0.2, delay: 0.2 });
       isHovered = false;
     }
@@ -155,11 +136,11 @@ loader.load(
 
     scene.add(blenderObject);
 
-    // Add event listener and interaction manager only if blenderObject is not null
+
     if (blenderObject) {
       blenderObject.addEventListener('click', () => openPopup("blenderObject"));
 
-      // Add event listener for mouse move
+
       document.addEventListener('mousemove', handleBlenderMouseMove);
 
       interactionManager.add(blenderObject);
@@ -175,26 +156,25 @@ loader.load(
 );
 
 function handleBlenderMouseMove(event) {
-  // Calculate normalized mouse coordinates (-1 to +1)
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster
+
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
+
   let intersects = raycaster.intersectObject(blenderObject);
 
-  // Move the blenderObject up on hover
+
   if (intersects.length > 0) {
     if (!isBlenderHovered) {
-      // Move the blenderObject up by 1 unit smoothly
+
       gsap.to(blenderObject.position, { y: '+=1', duration: 0.2 });
       isBlenderHovered = true;
     }
   } else {
     if (isBlenderHovered) {
-      // Move the blenderObject down by 1 unit smoothly after a delay of 0.5 seconds
       gsap.to(blenderObject.position, { y: '-=1', duration: 0.2, delay: 0.2 });
       isBlenderHovered = false;
     }
@@ -216,11 +196,11 @@ loader.load(
 
     scene.add(envelopeObject);
 
-    // Add event listener and interaction manager only if envelopeObject is not null
+
     if (envelopeObject) {
       envelopeObject.addEventListener('click', () => openPopup("envelopeObject"));
 
-      // Add event listener for mouse move
+
       document.addEventListener('mousemove', handleEnvelopeMouseMove);
 
       interactionManager.add(envelopeObject);
@@ -236,26 +216,26 @@ loader.load(
 );
 
 function handleEnvelopeMouseMove(event) {
-  // Calculate normalized mouse coordinates (-1 to +1)
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster
+
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
+
   let intersects = raycaster.intersectObject(envelopeObject);
 
-  // Move the envelopeObject up on hover
+
   if (intersects.length > 0) {
     if (!isEnvelopeHovered) {
-      // Move the envelopeObject up by 1 unit smoothly
+
       gsap.to(envelopeObject.position, { y: '+=1', duration: 0.2 });
       isEnvelopeHovered = true;
     }
   } else {
     if (isEnvelopeHovered) {
-      // Move the envelopeObject down by 1 unit smoothly after a delay of 0.5 seconds
+
       gsap.to(envelopeObject.position, { y: '-=1', duration: 0.2, delay: 0.2 });
       isEnvelopeHovered = false;
     }
@@ -275,11 +255,11 @@ loader.load(
 
     scene.add(fractalObject);
 
-    // Add event listener and interaction manager only if fractalObject is not null
+
     if (fractalObject) {
       fractalObject.addEventListener('click', () => openPopup("fractalObject"));
 
-      // Add event listener for mouse move
+
       document.addEventListener('mousemove', handleFractalMouseMove);
 
       interactionManager.add(fractalObject);
@@ -296,26 +276,26 @@ loader.load(
 
 function handleFractalMouseMove(event) {
   console.log("Mouse moved over fractal");
-  // Calculate normalized mouse coordinates (-1 to +1)
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster
+
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
+
   let intersects = raycaster.intersectObject(fractalObject);
 
-  // Move the fractalObject up on hover
+
   if (intersects.length > 0) {
     if (!isFractalHovered) {
-      // Move the fractalObject up by 1 unit smoothly
+
       gsap.to(fractalObject.position, { y: '+=1', duration: 0.2 });
       isFractalHovered = true;
     }
   } else {
     if (isFractalHovered) {
-      // Move the fractalObject down by 1 unit smoothly after a delay of 0.5 seconds
+
       gsap.to(fractalObject.position, { y: '-=1', duration: 0.2, delay: 0.2 });
       isFractalHovered = false;
     }
@@ -337,11 +317,11 @@ loader.load(
 
     scene.add(threeObject);
 
-    // Add event listener and interaction manager only if threeObject is not null
+
     if (threeObject) {
       threeObject.addEventListener('click', () => openPopup("threeObject"));
 
-      // Add event listener for mouse move
+
       document.addEventListener('mousemove', handleThreeMouseMove);
 
       interactionManager.add(threeObject);
@@ -357,26 +337,26 @@ loader.load(
 );
 
 function handleThreeMouseMove(event) {
-  // Calculate normalized mouse coordinates (-1 to +1)
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster
+
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
+
   let intersects = raycaster.intersectObject(threeObject);
 
-  // Move the threeObject up on hover
+
   if (intersects.length > 0) {
     if (!isThreeHovered) {
-      // Move the threeObject up by 1 unit smoothly
+
       gsap.to(threeObject.position, { y: '+=1', duration: 0.2 });
       isThreeHovered = true;
     }
   } else {
     if (isThreeHovered) {
-      // Move the threeObject down by 1 unit smoothly after a delay of 0.5 seconds
+
       gsap.to(threeObject.position, { y: '-=1', duration: 0.2, delay: 0.2 });
       isThreeHovered = false;
     }
@@ -400,11 +380,11 @@ loader.load(
 
     scene.add(insulinObject);
 
-    // Add event listener and interaction manager only if insulinObject is not null
+
     if (insulinObject) {
       insulinObject.addEventListener('click', () => openPopup("insulinObject"));
 
-      // Add event listener for mouse move
+
       document.addEventListener('mousemove', handleInsulinMouseMove);
 
       interactionManager.add(insulinObject);
@@ -420,26 +400,26 @@ loader.load(
 );
 
 function handleInsulinMouseMove(event) {
-  // Calculate normalized mouse coordinates (-1 to +1)
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster
+
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
+
   let intersects = raycaster.intersectObject(insulinObject);
 
-  // Move the insulinObject up on hover
+
   if (intersects.length > 0) {
     if (!isInsulinHovered) {
-      // Move the insulinObject up by 1 unit smoothly
+
       gsap.to(insulinObject.position, { y: '+=1', duration: 0.2 });
       isInsulinHovered = true;
     }
   } else {
     if (isInsulinHovered) {
-      // Move the insulinObject down by 1 unit smoothly after a delay of 0.5 seconds
+
       gsap.to(insulinObject.position, { y: '-=1', duration: 0.2, delay: 0.2 });
       isInsulinHovered = false;
     }
@@ -453,32 +433,31 @@ function handleInsulinMouseMove(event) {
 
 
 
-// Create a raycaster
+
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-// Add a listener for mousemove event
+
 document.addEventListener('mousemove', onMouseMove, false);
 
 function onMouseMove(event) {
-  // Calculate mouse coordinates in normalized device coordinates (NDC)
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster with the mouse coordinates
+
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
   const intersects = raycaster.intersectObjects(scene.children, true);
 
-  // Reset opacity for all objects in the scene
+
   scene.traverse((child) => {
     if (child.isMesh) {
       child.material.opacity = 0;
     }
   });
 
-  // Set opacity to 1 for the intersected object (if any)
+
   if (intersects.length > 0) {
     const object = intersects[0].object;
     if (object.isMesh) {
@@ -486,7 +465,7 @@ function onMouseMove(event) {
     }
   }
 }
-// Load Border Objects
+
 function loadBorderObject(filePath, position, rotation) {
   fbxLoader.load(
     filePath,
@@ -495,7 +474,7 @@ function loadBorderObject(filePath, position, rotation) {
       object.rotateY(rotation);
       object.position.copy(position);
 
-      // Set initial opacity to 0
+
       object.traverse((child) => {
         if (child.isMesh) {
           child.material.transparent = true;
@@ -503,7 +482,7 @@ function loadBorderObject(filePath, position, rotation) {
         }
       });
 
-      // Add the object to the scene
+
       scene.add(object);
     },
     (xhr) => {
@@ -515,7 +494,6 @@ function loadBorderObject(filePath, position, rotation) {
   );
 }
 
-// Load Border Objects with different positions and rotations
 const borderObjects = [
   { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(-20, -93, 0), rotation: Math.PI / 2 },
   { filePath: 'assets/border/border.fbx', position: new THREE.Vector3(0, -93, 0), rotation: Math.PI / 2 },
@@ -526,15 +504,11 @@ const borderObjects = [
   // Add more border objects as needed
 ];
 
-// Load all border objects
 borderObjects.forEach((border) => {
   loadBorderObject(border.filePath, border.position, border.rotation);
 });
 
-////////////////
-///////////////////linkedin
-//////////////////////
-//////////////////////////
+
 const objTextureLoader = new THREE.TextureLoader();
 const objLoader = new OBJLoader();
 
@@ -545,11 +519,7 @@ const [texture, obj] = await Promise.all([
 
 ]);
 
-/////////////////////
-///////////////////
-///////////////// linkedin
-/////////////////////
-/////////////////////
+
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 scene.add(ambientLight)
@@ -600,7 +570,7 @@ textGroup.position.z = 0;
 textGroup.position.x = 0;
 scene.add(textGroup3);
 
-let textH1; // Declare textH1 in an accessible scope
+let textH1;
 
 const fontLoader = new FontLoader();
 fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
@@ -626,8 +596,7 @@ fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
   textGroup.add(textH1);
 });
 
-// The following code assumes you want to use textH1 outside the callback.
-// If you have additional logic or rendering, make sure it's placed accordingly.
+
 
 const fontLoader5 = new FontLoader();
 fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
@@ -655,7 +624,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
   textGroup.add(textH2);
 });
 
-// Additional code or rendering logic can be placed here
+
 
 
 /**
@@ -669,7 +638,7 @@ const numberOfDonuts = 250;
 for (let i = 0; i < numberOfDonuts; i++) {
   const donut = new THREE.Mesh(donutGeometry, starMaterial);
 
-  // Adjust the range of positions for x, y, and z coordinates
+
   donut.position.x = (Math.random() - 0.5) * 600;
   donut.position.y = (Math.random() - 0.5) * 1500;
   donut.position.z = (Math.random() - 0.5) * 600;
@@ -677,8 +646,8 @@ for (let i = 0; i < numberOfDonuts; i++) {
   donut.rotation.x = Math.random() * Math.PI;
   donut.rotation.y = Math.random() * Math.PI;
 
-  // Increase the scale of the donuts
-  const scale = Math.random() * 2; // Adjust the factor based on your preference
+
+  const scale = Math.random() * 2;
   donut.scale.set(scale, scale, scale);
 
   scene.add(donut);
@@ -797,16 +766,12 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial);
   textH1.position.y = -150;
   textH1.position.x = positionX;
-  // const rotationAngle = Math.PI / -6;
-  // textH1.rotation.y = rotationAngle;
   textGroup3.add(textH1);
 
 
 });
 
-/**
- * Sizes
- */
+
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
@@ -822,37 +787,34 @@ window.addEventListener("resize", () => {
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
-/**
- * Animate
- */
-// Create a cube
 
 
-// Set up camera position
+
+
 camera.position.z = 5;
 
 var scrollSpeed = 0.05;
 var scrollX = 0;
-var maxScrollX = 45; // Set your desired threshold
+var maxScrollX = 45;
 
 function onScroll() {
   scrollX = window.scrollY * scrollSpeed;
 }
 
 
-// Set initial camera position
+
 const initialZPosition = 30;
 camera.position.z = initialZPosition;
 
-// Track total scroll distance
+
 let totalScrollDistance = 0;
 
-// Function to move the camera
+
 function moveCamera() {
   const currentScrollY = window.scrollY;
   const scrollDistance = currentScrollY - totalScrollDistance;
 
-  // camera.position.z += scrollDistance * -0.005;
+
   camera.position.y -= scrollDistance * 0.05;
 
   totalScrollDistance = currentScrollY;
@@ -866,28 +828,26 @@ moveCamera();
 
 
 
-///
 
-// 
 const xhr = new XMLHttpRequest();
 
 function openPopup(objectName) {
   const modal = document.querySelector("#modal");
   const modalContent = document.querySelector("#modal-content");
 
-  // Make an AJAX request to fetch the specific object's content
+
   xhr.open("GET", "/" + objectName.toLowerCase() + ".html", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       const response = xhr.responseText;
 
-      // Set modal content
+
       modalContent.innerHTML = response;
 
-      // Add modal-open class to body when modal is shown
+
       document.body.classList.add('modal-open');
 
-      // Show modal
+
       modal.showModal();
     }
   };
@@ -895,26 +855,26 @@ function openPopup(objectName) {
 }
 
 function handleObjectClick(object, clickHandler, event) {
-  // Calculate normalized mouse coordinates (-1 to +1)
+
   let mouse = new THREE.Vector2();
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster
+
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
+
   let intersects = raycaster.intersectObject(object);
 
-  // Trigger the click handler if an intersection is found
+
   if (intersects.length > 0) {
-    clickHandler(); // Call the specified click handler function
+    clickHandler();
   }
 }
 
-// Add an event listener to close the modal and remove modal-open class
+
 modal.addEventListener('close', function () {
-  // Remove modal-open class from body when modal is closed
+
   document.body.classList.remove('modal-open');
 });
 function loadObject(path, position, scale, clickHandler) {
@@ -927,18 +887,18 @@ function loadObject(path, position, scale, clickHandler) {
 
       scene.add(object);
 
-      // Register the object for raycasting
+      // adds object raycasting
       interactionManager.add(object);
 
-      // Update the interaction manager
+      // Updates interaction manager
       interactionManager.update();
 
-      // Add a click event listener
+      //click event listener
       document.addEventListener('click', function (event) {
         handleObjectClick(object, clickHandler, event);
       });
 
-      // Add event listener for mouse move
+      // event listener mouse move
       document.addEventListener('mousemove', function (event) {
         handleObjectMouseMove(object, event);
       });
@@ -976,29 +936,29 @@ loadObject(
   openPhoneNumber
 );
 
-// Function to handle mouse move events for objects
+// Function handle mouse move events for objects
 function handleObjectMouseMove(object, event) {
-  // Calculate normalized mouse coordinates (-1 to +1)
+
   let mouse = new THREE.Vector2();
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster
+  // Updates raycaster
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
+  // Checks for intersections
   let intersects = raycaster.intersectObject(object);
 
   // Move the object up on hover
   if (intersects.length > 0) {
     if (!object.userData.isHovered) {
-      // Move the object up by 1 unit smoothly
+
       gsap.to(object.position, { y: '+=1', duration: 0.2 });
       object.userData.isHovered = true;
     }
   } else {
     if (object.userData.isHovered) {
-      // Move the object down by 1 unit smoothly after a delay of 0.5 seconds
+
       gsap.to(object.position, { y: '-=1', duration: 0.2, delay: 0.2 });
       object.userData.isHovered = false;
     }
@@ -1035,7 +995,7 @@ const tick = () => {
 
   renderer.render(scene, camera)
 
-  // Call tick again on the next frame
+
   window.requestAnimationFrame(tick)
 
 
@@ -1047,7 +1007,7 @@ const tick = () => {
 
   triangle.position.y += Math.sin(elapsedTime * speedMultiplier) * amplitude;
 
-  // Check if the scrollX is less than the maximum threshold
+
   if (scrollX < maxScrollX) {
     cube.position.x = 60 - scrollX;
   }
@@ -1056,7 +1016,7 @@ const tick = () => {
   const speedMultiplierp = 2;
   const amplitudep = 0.005;
 
-  // cube.position.y = Math.sin(elapsedTime) * 2 + -47;
+
   const floatingAmplitude = 1;
   cube.position.y = Math.sin(elapsedTime * 0.5) * floatingAmplitude - 47;
 
