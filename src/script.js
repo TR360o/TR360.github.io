@@ -497,15 +497,15 @@ function loadBorderObject(filePath, position, rotation) {
 
 
 
-const objTextureLoader = new THREE.TextureLoader();
-const objLoader = new OBJLoader();
+// const objTextureLoader = new THREE.TextureLoader();
+// const objLoader = new OBJLoader();
 
-const [texture, obj] = await Promise.all([
-  objTextureLoader.loadAsync('linked/linked.png'),
-  objLoader.loadAsync(''),
+// const [texture, obj] = await Promise.all([
+//   objTextureLoader.loadAsync('linked/linked.png'),
+//   objLoader.loadAsync(''),
 
 
-]);
+// ]);
 
 
 
@@ -565,10 +565,10 @@ fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
   const textGeometryH1 = new TextGeometry("Welcome t    my space", {
     font: font,
     size: 5,
-    height: 0.4,
+    height: 0.1,
     curveSegments: 6,
     bevelEnabled: true,
-    bevelThickness: 1,
+    bevelThickness: 0.6,
     bevelSize: 0.3,
     bevelOffset: 0,
     bevelSegments: 4,
