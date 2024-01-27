@@ -867,7 +867,7 @@ cube.position.y = -55;
 fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
   const textGeometryH3 = new TextGeometry("contact", {
     font: font,
-    size: 2.5,
+    size: 3,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
