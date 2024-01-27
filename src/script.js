@@ -531,6 +531,8 @@ scene.add(directionalLight)
  */
 const textureLoader = new THREE.TextureLoader();
 const matcapTexture1 = textureLoader.load("/textures/matcaps/16.png");
+const matcapTexture777 = textureLoader.load("/textures/matcaps/3.png");
+matcapTexture777.colorSpace = THREE.SRGBColorSpace;
 matcapTexture1.colorSpace = THREE.SRGBColorSpace;
 const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture1 });
 
@@ -691,6 +693,136 @@ fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
   textGroup2.add(textH1);
 
 
+});
+
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("I design and develop ", {
+    font: font,
+    size: 2,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -40;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+
+
+});
+
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("meaningful experiences.", {
+    font: font,
+    size: 2,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -43;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("I’m driven by insatiable", {
+    font: font,
+    size: 2,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -48;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("curiosity.", {
+    font: font,
+    size: 2,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -51;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("I love the journey and", {
+    font: font,
+    size: 2,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -54;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("exploration along the way.", {
+    font: font,
+    size: 2,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -57;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
 });
 
 // Group3 works
