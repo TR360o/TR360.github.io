@@ -1006,7 +1006,7 @@ const tick = () => {
 
 
   const floatingAmplitude = 1;
-  cube.position.y = Math.sin(elapsedTime * 0.5) * floatingAmplitude - 50;
+  // cube.position.y = Math.sin(elapsedTime * 0.5) * floatingAmplitude - 50;
 
 
 
