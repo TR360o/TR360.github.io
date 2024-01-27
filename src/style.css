@@ -153,7 +153,7 @@ img {
 
   width: 100%;
   height: auto;
-
+  border-radius: 5px;
 }
 
 video {
@@ -168,6 +168,30 @@ video {
   width: 45%;
   padding: 25px;
   margin: 0 auto;
+
+}
+
+.column img {
+  margin-top: 12px;
+  vertical-align: middle;
+  width: 100%;
+  height: 300px;
+
+}
+
+.headerImg {
+  width: 100%;
+  height: 100%;
+  /* Set a fixed height for all images */
+  object-fit: cover;
+  /* This property preserves the aspect ratio while covering the entire container */
+}
+
+.headerImg img {
+  width: 100%;
+  height: 481px;
+  object-fit: cover;
+
 }
 
 .row::after {
