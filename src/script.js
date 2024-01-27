@@ -42,7 +42,7 @@ const interactionManager = new InteractionManager(
 
 //Variables
 var positionX = -35;
-var letterThickness = 0.4;
+var letterThickness = 0.15;
 
 // work models
 var positionYrow1 = -97;
@@ -672,7 +672,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
     curveSegments: 6,
     bevelEnabled: true,
     bevelThickness: letterThickness,
-    bevelSize: 0.23,
+    bevelSize: 0.15,
     bevelOffset: 0,
     bevelSegments: 4,
   });
@@ -704,7 +704,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
     curveSegments: 6,
     bevelEnabled: true,
     bevelThickness: letterThickness,
-    bevelSize: 0.3,
+    bevelSize: 0.15,
     bevelOffset: 0,
     bevelSegments: 4,
   });
@@ -724,12 +724,12 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
 });
 
 const thikaTexture = new THREE.TextureLoader().load("/thika/thikaCube.png");
-var cgeometry = new THREE.BoxGeometry(15, 15, 0.8);
+var cgeometry = new THREE.BoxGeometry(25, 25, 0.8);
 var material = new THREE.MeshBasicMaterial({ map: thikaTexture });
 var cube = new THREE.Mesh(cgeometry, material);
 textGroup2.add(cube);
 
-cube.position.y = -47;
+cube.position.y = -55;
 
 
 fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
@@ -740,7 +740,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
     curveSegments: 6,
     bevelEnabled: true,
     bevelThickness: letterThickness,
-    bevelSize: 0.3,
+    bevelSize: 0.15,
     bevelOffset: 0,
     bevelSegments: 4,
   });
@@ -1006,7 +1006,7 @@ const tick = () => {
 
 
   const floatingAmplitude = 1;
-  cube.position.y = Math.sin(elapsedTime * 0.5) * floatingAmplitude - 47;
+  cube.position.y = Math.sin(elapsedTime * 0.5) * floatingAmplitude - 50;
 
 
 
