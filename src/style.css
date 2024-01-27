@@ -234,3 +234,9 @@ body {
   padding: 0 2rem;
   transition: 0.5s;
 }
+
+.sketchfab-embed-wrapper {
+
+  width: 640px;
+  margin: 0 auto;
+}
