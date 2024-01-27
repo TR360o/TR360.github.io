@@ -42,7 +42,7 @@ const interactionManager = new InteractionManager(
 
 //Variables
 var positionX = -35;
-var letterThickness = 0.15;
+var letterThickness = 0.2;
 
 // work models
 var positionYrow1 = -97;
@@ -663,7 +663,7 @@ textGroup.add(triangle);
 
 const fontLoader2 = new FontLoader();
 
-fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
 
   const textGeometryH1 = new TextGeometry("About Me", {
     font: font,
@@ -672,7 +672,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
     curveSegments: 6,
     bevelEnabled: true,
     bevelThickness: letterThickness,
-    bevelSize: 0.15,
+    bevelSize: 0.1,
     bevelOffset: 0,
     bevelSegments: 4,
   });
@@ -696,7 +696,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
 // Group3 works
 
 const fontLoader3 = new FontLoader();
-fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
   const textGeometryH3 = new TextGeometry("Works", {
     font: font,
     size: 3,
@@ -704,7 +704,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
     curveSegments: 6,
     bevelEnabled: true,
     bevelThickness: letterThickness,
-    bevelSize: 0.15,
+    bevelSize: 0.1,
     bevelOffset: 0,
     bevelSegments: 4,
   });
@@ -732,7 +732,7 @@ textGroup2.add(cube);
 cube.position.y = -55;
 
 
-fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
   const textGeometryH3 = new TextGeometry("contact", {
     font: font,
     size: 2.5,
@@ -740,7 +740,7 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
     curveSegments: 6,
     bevelEnabled: true,
     bevelThickness: letterThickness,
-    bevelSize: 0.15,
+    bevelSize: 0.1,
     bevelOffset: 0,
     bevelSegments: 4,
   });
