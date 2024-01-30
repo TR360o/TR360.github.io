@@ -176,11 +176,42 @@ video {
   margin-top: 12px;
   vertical-align: middle;
   width: 100%;
+  height: 300px;
+
+}
+
+.columnn {
+  float: left;
+  width: 45%;
+  padding: 25px;
+  margin: 0 auto;
+
+}
+
+.columnn img {
+  margin-top: 12px;
+  vertical-align: middle;
+  width: 100%;
   height: auto;
 
 }
 
+.columnnd {
+  float: left;
+  width: 45%;
+  padding: 25px;
+  margin: 0 auto;
+}
 
+.columnnd img {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: 12px;
+  vertical-align: middle;
+  width: 100%;
+  height: auto;
+
+}
 
 .headerImg {
   width: 100%;
@@ -279,4 +310,14 @@ video::-webkit-media-controls {
 
 video {
   outline: none;
+}
+
+
+
+.centerFigma {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Adjust as needed */
 }
