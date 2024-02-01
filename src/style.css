@@ -7,6 +7,7 @@ body {
 }
 
 canvas {
+  z-index: 1;
   position: fixed;
   top: 0;
   left: 0;
@@ -96,9 +97,10 @@ h2 {
 }
 
 p {
-  font-family: quicksand, sans-serif;
+
   margin: 0 auto;
   color: white;
+  font-family: quicksand, sans-serif;
   font-size: 21px;
   font-weight: 400;
   margin-bottom: 50px;
@@ -320,4 +322,32 @@ video {
   align-items: center;
 
   /* Adjust as needed */
+}
+
+
+#overlay {
+  z-index: 2;
+  background-color: #d6353500;
+  width: 580px;
+  min-height: 300px;
+  /* Set a minimum height */
+  position: absolute;
+  top: 1200px;
+  left: 235px;
+  display: flex;
+  flex-direction: column;
+  align-self: left;
+}
+
+#containAbout {
+  margin: 0 auto;
+  max-width: 550px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  flex-grow: 1;
+  color: white;
+  font-family: quicksand, sans-serif;
+  font-size: 21px;
+  font-weight: 400;
+  align-items: left;
 }
