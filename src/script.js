@@ -17,6 +17,8 @@ import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { InteractionManager } from 'three.interactive';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { gsap } from 'gsap';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
 
 
 // Scene & renderer
@@ -132,11 +134,11 @@ let blenderObject = null;
 let isBlenderHovered = false;
 
 loader.load(
-  'blender/blenderCom.glb',
+  'blender/books.glb',
   function (blender) {
     blenderObject = blender.scene;
-    blender.scene.scale.set(0.01, 0.01, 0.01);
-    blender.scene.position.set(positionXColumn2, positionYrow1, 0);
+    blender.scene.scale.set(2.7, 2.7, 2.7);
+    blender.scene.position.set(positionXColumn2 + 10, positionYrow2, 0);
 
     scene.add(blenderObject);
 
@@ -196,7 +198,7 @@ loader.load(
     envelopeObject = envelope.scene;
     envelope.scene.scale.set(3, 3, 3);
     envelope.scene.rotateY(Math.PI / -2);
-    envelope.scene.position.set(positionXColumn1, positionYrow2, 0);
+    envelope.scene.position.set(positionXColumn1 + 8, positionYrow2 + 4, 0);
 
     scene.add(envelopeObject);
 
@@ -308,64 +310,9 @@ function handleFractalMouseMove(event) {
 
 
 //three model
-let threeObject = null;
-let isThreeHovered = false;
-
-loader.load(
-  'three/threeJs.glb',
-  (three) => {
-    threeObject = three.scene;
-    three.scene.scale.set(0.1, 0.1, 0.1);
-    three.scene.rotateY(Math.PI / -2015);
-    three.scene.position.set(positionXColumn2 - 1, positionYrow2, 0);
-
-    scene.add(threeObject);
 
 
-    if (threeObject) {
-      threeObject.addEventListener('click', () => openPopup("threeObject"));
 
-
-      document.addEventListener('mousemove', handleThreeMouseMove);
-
-      interactionManager.add(threeObject);
-    }
-
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded tree');
-  },
-  (error) => {
-    console.log(error);
-  }
-);
-
-function handleThreeMouseMove(event) {
-
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-
-  raycaster.setFromCamera(mouse, camera);
-
-
-  let intersects = raycaster.intersectObject(threeObject);
-
-
-  if (intersects.length > 0) {
-    if (!isThreeHovered) {
-
-      gsap.to(threeObject.position, { y: '+=1', duration: 0.2 });
-      isThreeHovered = true;
-    }
-  } else {
-    if (isThreeHovered) {
-
-      gsap.to(threeObject.position, { y: '-=1', duration: 0.2, delay: 0.2 });
-      isThreeHovered = false;
-    }
-  }
-}
 
 
 
@@ -380,7 +327,7 @@ loader.load(
     insulin.scene.scale.set(0.35, 0.35, 0.35);
     insulin.scene.rotateZ(Math.PI / -4);
     insulin.scene.rotateX(Math.PI / 2);
-    insulin.scene.position.set(positionXColumn3 - 1, positionYrow2, 0);
+    insulin.scene.position.set(positionXColumn2 - 2, positionYrow1 + 3, 0);
 
     scene.add(insulinObject);
 

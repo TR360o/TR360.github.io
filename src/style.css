@@ -44,7 +44,7 @@ h1 em {
   background-color: black;
   /* Green */
   border: none;
-  color: #00c0fa;
+  color: #A734DF;
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
@@ -57,12 +57,12 @@ h1 em {
 
 .button {
   background-color: black;
-  color: #00c0fa;
-  border: 2px solid #00c0fa;
+  color: #A734DF;
+  border: 2px solid #A734DF;
 }
 
 .button:hover {
-  background-color: #00c0fa;
+  background-color: #A734DF;
   color: white;
 }
 
