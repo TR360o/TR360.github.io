@@ -88,44 +88,56 @@ h1 {
 
 }
 
-h2 {
-  font-family: quicksand, sans-serif;
-  color: white;
-  font-size: 1.875em;
-  font-weight: 700;
-  margin-bottom: 50px;
-}
 
-p {
-
-  margin: 0 auto;
-  color: white;
-  font-family: quicksand, sans-serif;
-  font-size: 21px;
-  font-weight: 400;
-  margin-bottom: 50px;
-  margin-top: 50px;
-  max-width: 700px;
-}
-
-.Bold {
-  font-weight: 700;
-}
 
 h3 {
-
-  color: white;
-  font-size: 1em;
-
-
-}
-
-h4 {
   color: white;
   font-size: 1em;
   margin-bottom: 25px;
 }
 
+
+
+.Bold {
+  font-weight: 700;
+}
+
+p {
+  margin: 0 auto;
+  color: white;
+  font-family: quicksand, sans-serif;
+  font-size: 1.3125em;
+  font-weight: 400;
+  margin-bottom: 50px;
+  margin-top: 25px;
+  max-width: 700px;
+  margin-left: 150px;
+}
+
+h2 {
+  font-family: quicksand, sans-serif;
+  color: white;
+  font-size: 1.875em;
+  font-weight: 700;
+  margin-bottom: 25px;
+  margin-left: 150px;
+  /* Add this line to align left */
+}
+
+h4 {
+  font-family: quicksand, sans-serif;
+  color: white;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 25px;
+  margin-left: 150px;
+  /* Add this line to align left */
+}
+
+
+#toppy {
+  margin-top: 50px;
+}
 
 
 #contact {
