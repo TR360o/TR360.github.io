@@ -1169,7 +1169,7 @@ function handleObjectMouseMove(object, event) {
 
 // Function to open LinkedIn.com
 function openLinkedIn() {
-  window.open('https://www.linkedin.com', '_blank');
+  window.open('https://www.linkedin.com/in/thika-rudolph-0579a81b5/', '_blank');
 }
 
 // Function to open Instagram.com
