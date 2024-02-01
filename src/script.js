@@ -661,6 +661,8 @@ triangle.rotation.z = Math.PI / 1.2;
 textGroup.add(triangle);
 
 
+let size = 1.2;
+let poep = -90;
 //Group 2 About me
 
 const fontLoader2 = new FontLoader();
@@ -697,9 +699,9 @@ fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
 
 
 fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
-  const textGeometryH3 = new TextGeometry("I design and develop ", {
+  const textGeometryH3 = new TextGeometry("Hi there! I’m Thika, a third-year  ", {
     font: font,
-    size: 2,
+    size: size,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
@@ -721,9 +723,9 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
 
 
 fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
-  const textGeometryH3 = new TextGeometry("meaningful experiences.", {
+  const textGeometryH3 = new TextGeometry("Communication and Multimedia Design", {
     font: font,
-    size: 2,
+    size: size,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
@@ -743,9 +745,9 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
 
 
 fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
-  const textGeometryH3 = new TextGeometry("I’m driven by insatiable", {
+  const textGeometryH3 = new TextGeometry("student at Hogeschool Zuyd in Maastricht.", {
     font: font,
-    size: 2,
+    size: size,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
@@ -758,14 +760,14 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
   const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
 
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
-  textH1.position.y = -48;
+  textH1.position.y = -46;
   textH1.position.x = positionX;
   textGroup3.add(textH1);
 });
 fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
-  const textGeometryH3 = new TextGeometry("curiosity.", {
+  const textGeometryH3 = new TextGeometry("As a designer and developer, I love pushing", {
     font: font,
-    size: 2,
+    size: size,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
@@ -778,16 +780,16 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
   const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
 
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
-  textH1.position.y = -51;
+  textH1.position.y = -49;
   textH1.position.x = positionX;
   textGroup3.add(textH1);
 });
 
 
 fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
-  const textGeometryH3 = new TextGeometry("I love the journey and", {
+  const textGeometryH3 = new TextGeometry("boundaries, exploring new ideas and concepts. ", {
     font: font,
-    size: 2,
+    size: size,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
@@ -800,14 +802,14 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
   const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
 
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
-  textH1.position.y = -54;
+  textH1.position.y = -52;
   textH1.position.x = positionX;
   textGroup3.add(textH1);
 });
 fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
-  const textGeometryH3 = new TextGeometry("exploration along the way.", {
+  const textGeometryH3 = new TextGeometry("My journey in the realm of design has ignited", {
     font: font,
-    size: 2,
+    size: size,
     height: 0.4,
     curveSegments: 6,
     bevelEnabled: true,
@@ -821,6 +823,136 @@ fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
 
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
   textH1.position.y = -57;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("a profound interest in motion design.", {
+    font: font,
+    size: size,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -60;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("Currently, I am in the early stages of learning Blender", {
+    font: font,
+    size: size,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -63;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("and three.js, fascinated by their transformative capabilities.", {
+    font: font,
+    size: size,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -66;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("This portfolio serves as a testament to all that I have", {
+    font: font,
+    size: size,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -69;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("learned up to this point and what I will continue to", {
+    font: font,
+    size: size,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -72;
+  textH1.position.x = positionX;
+  textGroup3.add(textH1);
+});
+
+fontLoader5.load("/fonts/Quicksand_Medium_Regular.json", (font) => {
+  const textGeometryH3 = new TextGeometry("explore in the future.", {
+    font: font,
+    size: size,
+    height: 0.4,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: letterThickness,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial777 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture777 });
+
+  const textH1 = new THREE.Mesh(textGeometryH3, textMaterial777);
+  textH1.position.y = -75;
   textH1.position.x = positionX;
   textGroup3.add(textH1);
 });
@@ -848,7 +980,7 @@ fontLoader.load("/fonts/Manrope_Bold.json", (font) => {
   });
 
   const textH1 = new THREE.Mesh(textGeometryH3, textMaterial);
-  textH1.position.y = -75;
+  textH1.position.y = -85;
   textH1.position.x = positionX;
   textGroup3.add(textH1);
 
